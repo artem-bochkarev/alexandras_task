@@ -1,5 +1,6 @@
 #ifndef POLICLINIC_HASH_H
 #define POLICLINIC_HASH_H
+#define _CRT_SECURE_NO_WARNINGS
 #include "policlinic_structs.h"
 #include <list>
 

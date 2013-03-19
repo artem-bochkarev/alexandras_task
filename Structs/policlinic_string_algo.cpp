@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <fstream>
 
+
 void toLowCaseCP866(char * str)
 {
 	char * s = str;
@@ -11,10 +12,10 @@ void toLowCaseCP866(char * str)
 		if ((*s >= 'A')&&(*s <= 'Z'))
 		{
 			*s += 32;
-		}else if ((*s >= (char)0x80)&&(*s <= (char)0x8F))
+		}else if ((*s >= '\x80')&&(*s <= '\x8F'))
 		{
 			*s += 32;
-		}else if ((*s >= (char)0x90)&&(*s <= (char)0x9F))
+		}else if ((*s >= '\x90')&&(*s <= '\x9F'))
 		{
 			*s += 80;
 		}else
@@ -25,22 +26,23 @@ void toLowCaseCP866(char * str)
 	}
 }
 
+
 void win1251toCP866(char * str)
 {
 	while (*str != 0)
 	{
-		if ((*str >= (char)0xC0)&&(*str <= (char)0xEF))
+		if ((*str >= '\xC0')&&(*str <= '\xEF'))
 		{
 			*str -= 64;
-		}else if ((*str >= (char)0xF0)&&(*str <= (char)0xFF))
+		}else if ((*str >= '\xF0')&&(*str <= '\xFF'))
 		{
 			*str -= 16;
-		}else if (*str == (char)0xA8) 
+		}else if (*str == '\xA8') 
 		{
-			*str = (char)(0xF0);
-		}else if (*str == (char)0xB8) 
+			*str = '\xF0';
+		}else if (*str == '\xB8') 
 		{
-			*str = (char)(0xF1);
+			*str = '\xF1';
 		}else
 		{
 			//no change on value *s
@@ -53,18 +55,18 @@ void CP866toWin1251(char * str)
 {
 	while (*str != 0)
 	{
-		if ((*str >= (char)0x80)&&(*str <= (char)0xAF))
+		if ((*str >= '\x80')&&(*str <= '\xAF'))
 		{
 			*str += 64;
-		}else if ((*str >= 0xE0)&&(*str <= 0xEF))
+		}else if ((*str >= '\xE0')&&(*str <= '\xEF'))
 		{
 			*str += 16;
-		}else if (*str == 0xF0) 
+		}else if (*str == '\xF0') 
 		{
-			*str = (char)(0xA8);
-		}else if (*str == 0xF1)
+			*str = '\xA8';
+		}else if (*str == '\xF1')
 		{
-			*str = (char)(0xB8);
+			*str = '\xB8';
 		}else
 		{
 			//no change on value *s
@@ -72,6 +74,7 @@ void CP866toWin1251(char * str)
 		++str;
 	}
 }
+
 
 void removeDoubleWhiteSpaces(char * str)
 {

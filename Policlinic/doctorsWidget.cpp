@@ -47,6 +47,19 @@ doctorsWidget::doctorsWidget( QWidget *parent, const QString& filename )
     fillRows();
 }
 
+void doctorsWidget::fillRow( doctor& doc, int row )
+{
+    QByteArray fio(doc.fio), dolgnost(doc.dolgnost);
+    QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+    QString fioString = codec->toUnicode(fio);
+    QString dolgString = codec->toUnicode(dolgnost);
+
+    QTableWidgetItem *fioItem = new QTableWidgetItem( fioString );
+    ui.tableWidget->setItem(row, 0, fioItem);
+    QTableWidgetItem *dolgItem = new QTableWidgetItem( dolgString );
+    ui.tableWidget->setItem(row, 1, dolgItem);
+}
+
 void doctorsWidget::fillRows()
 {
     ui.tableWidget->clearContents();
@@ -57,15 +70,7 @@ void doctorsWidget::fillRows()
     int row = 0;
     for ( ; iter != cachedDoctors.end(); ++iter )
     {
-        QByteArray fio(iter->fio), dolgnost(iter->dolgnost);
-        QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
-        QString fioString = codec->toUnicode(fio);
-        QString dolgString = codec->toUnicode(dolgnost);
-
-        QTableWidgetItem *fioItem = new QTableWidgetItem( fioString );
-        ui.tableWidget->setItem(row, 0, fioItem);
-        QTableWidgetItem *dolgItem = new QTableWidgetItem( dolgString );
-        ui.tableWidget->setItem(row, 1, dolgItem);
+        fillRow( *iter, row );
         ++row;
     }
 
@@ -108,7 +113,8 @@ void doctorsWidget::changePressed()
 {
     doctor tmp = docClicked;
     doctorChangeDialog dlg( this, &tmp );
-    if ( dlg.exec()==QDialog::Accepted )
+    int result = dlg.exec();
+    if ( result==QDialog::Accepted )
     {
         tree.changeData( docClicked, tmp );
         fillRows(); // TODO: fill just this row

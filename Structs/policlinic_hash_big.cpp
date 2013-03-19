@@ -67,7 +67,7 @@ BigHash::~BigHash()
 
 void BigHash::readFromWinTXT(const char * name)
 {
-	FILE * file = fopen("pacients.txt", "rt");
+	FILE * file = fopen(name, "rt");
 	char s[51];
 	fgets(&s[0], 50, file);
 	int n;

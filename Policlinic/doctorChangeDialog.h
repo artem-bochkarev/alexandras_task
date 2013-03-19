@@ -14,12 +14,14 @@ public:
     ~doctorChangeDialog();
 
 private slots:
+    virtual void done(int);
+
+private:
     void fioChanged();
     void dolgnostChanged();
     void workChanged();
     void cabinetChanged();
 
-private:
     Ui::Dialog ui;
     doctor* doc;
 };

@@ -21,25 +21,37 @@ doctorChangeDialog::~doctorChangeDialog()
 {
 }
 
+void doctorChangeDialog::done(int accepted)
+{
+    if (accepted > 0)
+    {
+        fioChanged();
+        dolgnostChanged();
+        workChanged();
+        cabinetChanged();
+    }
+    QDialog::done(accepted);
+}
+
 void doctorChangeDialog::fioChanged()
 {
     QTextCodec* codec = QTextCodec::codecForName("Windows-1251");
     QByteArray fio = codec->fromUnicode( ui.fio->text() );
-    strncpy( doc->fio, fio.constData(), 50 );
+    strncpy_s( doc->fio, fio.constData(), 50 );
 }
 
 void doctorChangeDialog::dolgnostChanged()
 {
     QTextCodec* codec = QTextCodec::codecForName("Windows-1251");
     QByteArray dolgnost = codec->fromUnicode( ui.speciality->text() );
-    strncpy( doc->dolgnost, dolgnost.constData(), 50 );
+    strncpy_s( doc->dolgnost, dolgnost.constData(), 50 );
 }
 
 void doctorChangeDialog::workChanged()
 {
     QTextCodec* codec = QTextCodec::codecForName("Windows-1251");
     QByteArray work = codec->fromUnicode( ui.workHours->text() );
-    strncpy( doc->priem, work.constData(), 50 );
+    strncpy_s( doc->priem, work.constData(), 50 );
 }
 
 void doctorChangeDialog::cabinetChanged()

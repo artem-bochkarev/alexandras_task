@@ -1,0 +1,6 @@
+Debug/
+Release/
+GeneratedFiles/
+*.vcproj.*.user
+*.suo
+*.ncb

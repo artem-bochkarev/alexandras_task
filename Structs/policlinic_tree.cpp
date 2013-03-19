@@ -78,7 +78,7 @@ bool Tree::readFromFile(char const * name)
 	FILE * file = fopen(name, "rb");
 	size_t k;
 	fread(&k, sizeof(size_t), 1, file);
-	for (int i=0; i<k; ++i)
+	for (size_t i=0; i<k; ++i)
 	{
 		doctor temp;
 		fread(&temp, sizeof(temp), 1, file);
@@ -157,7 +157,7 @@ void Tree::lpk(std::list<doctor> & spisok, Node * a)
 	if (a != NULL)
 	{
 		lpk(spisok, a->left);
-		spisok.push_back(a->data);
+		spisok.push_front(a->data);
 		lpk(spisok, a->right);
 	}
 }

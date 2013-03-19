@@ -1,5 +1,6 @@
 #ifndef POLIClINIC_LIST_H
 #define POLICLINIC_LIST_H
+#define _CRT_SECURE_NO_WARNINGS
 #include "policlinic_structs.h"
 #include <stdio.h>
 #include <list>

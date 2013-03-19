@@ -19,5 +19,5 @@ void MainWindow::openDoctors()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Open doctors file"), "", tr("Text doctors file (*.txt);;Binary doctors files (*.bin)"));
-    ui.tabWidget->addTab( new doctorsWidget( this, fileName ), tr("Doctirs") );
+    ui.tabWidget->addTab( new doctorsWidget( this, fileName ), tr("Doctors") );
 }

@@ -22,6 +22,7 @@ private slots:
 
 private:
     void fillRows();
+    void fillRow( doctor& doc, int row );
 
     QMenu* contextMenu;
     QAction* deleteAction;
