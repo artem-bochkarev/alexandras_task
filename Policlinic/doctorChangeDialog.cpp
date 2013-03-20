@@ -7,7 +7,8 @@ doctorChangeDialog::doctorChangeDialog( QWidget *parent, doctor* doc )
     ui.setupUi(this);
 
     QByteArray fio(doc->fio), dolgnost(doc->dolgnost), work(doc->priem);
-    QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+    //QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+    QTextCodec *codec = QTextCodec::codecForName("CP866");
     QString fioString = codec->toUnicode(fio);
     QString dolgnostString = codec->toUnicode(dolgnost);
     QString workString = codec->toUnicode(work);
@@ -35,21 +36,24 @@ void doctorChangeDialog::done(int accepted)
 
 void doctorChangeDialog::fioChanged()
 {
-    QTextCodec* codec = QTextCodec::codecForName("Windows-1251");
+    //QTextCodec* codec = QTextCodec::codecForName("Windows-1251");
+    QTextCodec *codec = QTextCodec::codecForName("CP866");
     QByteArray fio = codec->fromUnicode( ui.fio->text() );
     strncpy_s( doc->fio, fio.constData(), 50 );
 }
 
 void doctorChangeDialog::dolgnostChanged()
 {
-    QTextCodec* codec = QTextCodec::codecForName("Windows-1251");
+    //QTextCodec* codec = QTextCodec::codecForName("Windows-1251");
+    QTextCodec *codec = QTextCodec::codecForName("CP866");
     QByteArray dolgnost = codec->fromUnicode( ui.speciality->text() );
     strncpy_s( doc->dolgnost, dolgnost.constData(), 50 );
 }
 
 void doctorChangeDialog::workChanged()
 {
-    QTextCodec* codec = QTextCodec::codecForName("Windows-1251");
+    //QTextCodec* codec = QTextCodec::codecForName("Windows-1251");
+    QTextCodec *codec = QTextCodec::codecForName("CP866");
     QByteArray work = codec->fromUnicode( ui.workHours->text() );
     strncpy_s( doc->priem, work.constData(), 50 );
 }

@@ -46,6 +46,15 @@ void BigHash::searchFio(const char * fio, std::list<pacient> & lst)
 		}
 }
 
+void BigHash::showAll(std::list<pacient> & lst)
+{
+	for (int i=0; i<size; ++i)
+		if (mas[i] != NULL)
+		{
+			mas[i]->searchFIO("", lst);
+		}
+}
+
 BigHash::BigHash(int max_okrug, int sm_size)
 {
 	count = 0;
@@ -92,8 +101,8 @@ void BigHash::readFromWinTXT(const char * name)
 		pac.work[strlen((char *)&pac.work)-1] = 0;
 		pac.addres[strlen((char *)&pac.addres)-1] = 0;
 		pac.fio[strlen((char *)&pac.fio)-1] = 0;
-		if (add(pac))
-			++count;
+
+		add(pac);
 	}
 	fclose(file);
 }

@@ -14,6 +14,7 @@ public:
 
 private slots:
     void openDoctors();
+    void openPatients();
 
 private:
     Ui::MainWindowClass ui;

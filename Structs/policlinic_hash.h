@@ -36,6 +36,7 @@ public:
 	void remove(pacient temp);                                      //removes patient from hash
 	pacient * getID(reg_num num);                                   //returns pointer to pacient by his reg_num
 	void searchFio(const char * fio, std::list<pacient> & lst);     //searches for patient, result will be placed in list
+	void showAll(std::list<pacient> & lst);     //searches for patient, result will be placed in list
 	BigHash(int max_okrug, int sm_size);                            //constructs new Hash, where sm_size is size for SmallHash
 	~BigHash();
 	void readFromWinTXT(const char * name);                         //reads patients from file

@@ -1,13 +1,14 @@
-#include "doctorsWidget.h"
-#include "doctorChangeDialog.h"
+#include "pacientsWidget.h"
+//#include "doctorChangeDialog.h"
 #include <QFile>
 #include <QTextStream>
 #include <QTextCodec>
 #include <QContextMenuEvent>
 #include <string>
+#include <cassert>
 
-doctorsWidget::doctorsWidget( QWidget *parent, const QString& filename )
-    : QWidget(parent)
+pacientsWidget::pacientsWidget( QWidget *parent, const QString& filename )
+    : QWidget(parent), hash(3, 2)
 {
     ui.setupUi(this);
 
@@ -39,37 +40,38 @@ doctorsWidget::doctorsWidget( QWidget *parent, const QString& filename )
 
     if ( filename.endsWith( 't' ) )
     {
-        tree.readFromTXT( file );
+        hash.readFromWinTXT( file );
     }else
     {
-        tree.readFromFile( file );
+        
+        //tree.readFromFile( file );
     }
     fillRows();
 }
 
-void doctorsWidget::fillRow( doctor& doc, int row )
+void pacientsWidget::fillRow( pacient& pac, int row )
 {
-    QByteArray fio(doc.fio), dolgnost(doc.dolgnost);
+    QByteArray fio(pac.fio);
     //QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
     QTextCodec *codec = QTextCodec::codecForName("CP866");
     QString fioString = codec->toUnicode(fio);
-    QString dolgString = codec->toUnicode(dolgnost);
+    QString yearString(QString::number(pac.birth));
 
     QTableWidgetItem *fioItem = new QTableWidgetItem( fioString );
     ui.tableWidget->setItem(row, 0, fioItem);
-    QTableWidgetItem *dolgItem = new QTableWidgetItem( dolgString );
+    QTableWidgetItem *dolgItem = new QTableWidgetItem( yearString );
     ui.tableWidget->setItem(row, 1, dolgItem);
 }
 
-void doctorsWidget::fillRows()
+void pacientsWidget::fillRows()
 {
     ui.tableWidget->clearContents();
-    ui.tableWidget->setRowCount( tree.size() );
-    cachedDoctors.clear();
-    tree.showAll( cachedDoctors );
-    std::list<doctor>::iterator iter = cachedDoctors.begin();
+    ui.tableWidget->setRowCount( hash.getSize() );
+    cachedPacients.clear();
+    hash.showAll( cachedPacients );
+    std::list<pacient>::iterator iter = cachedPacients.begin();
     int row = 0;
-    for ( ; iter != cachedDoctors.end(); ++iter )
+    for ( ; iter != cachedPacients.end(); ++iter )
     {
         fillRow( *iter, row );
         ++row;
@@ -77,53 +79,58 @@ void doctorsWidget::fillRows()
 
 }
 
-void doctorsWidget::cellCLicked(int row, int column)
+void pacientsWidget::cellCLicked(int row, int column)
 {
-    std::list<doctor>::iterator iter = cachedDoctors.begin();
+    std::list<pacient>::iterator iter = cachedPacients.begin();
     for ( int i=0; i<row; ++i )
         iter++;
-    QByteArray fio(iter->fio), dolgnost(iter->dolgnost), hours(iter->priem);
+    QByteArray fio(iter->fio), addres(iter->addres), dolgnost(iter->work);
     
     //QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
     QTextCodec *codec = QTextCodec::codecForName("CP866");
-    ui.cabinetLabel->setText( tr("Cabinet: ") + QString::number( iter->cabinet ) );
-    ui.directLabel->setText( tr("Directions: Don't know") );
+    QString numberStr;
+    numberStr.sprintf("%02i %06i", iter->number.okrug, iter->number.num);
+    ui.idLabel->setText( numberStr );
+    ui.addressLabel->setText( codec->toUnicode(addres) );
+    ui.birthLabel->setText( QString::number(iter->birth) );
+    ui.workPlace->setText( codec->toUnicode(dolgnost) );
+
+    ui.directionsLabel->setText( tr("Directions: Don't know") );
     ui.nameLabel->setText( codec->toUnicode(fio) );
-    ui.specLabel->setText( codec->toUnicode(dolgnost) );
-    ui.workLabel->setText( tr("Work hours: ") + codec->toUnicode( hours ) );
-    docClicked = *iter;
+
+    pacientClicked = *iter;
 }
 
-void doctorsWidget::contextMenuEvent( QContextMenuEvent * qEvent )
+void pacientsWidget::contextMenuEvent( QContextMenuEvent * qEvent )
 {
     //qEvent->
     contextMenu->exec( qEvent->globalPos() );
 }
 
-void doctorsWidget::contextMenuRequested( const QPoint& point )
+void pacientsWidget::contextMenuRequested( const QPoint& point )
 {
     contextMenu->exec( ui.tableWidget->mapToGlobal( point ) );
 }
 
-void doctorsWidget::deletePressed()
+void pacientsWidget::deletePressed()
 {
-    tree.remove( docClicked );
+    hash.remove(pacientClicked);
     fillRows();
 }
 
-void doctorsWidget::changePressed()
+void pacientsWidget::changePressed()
 {
-    doctor tmp = docClicked;
-    doctorChangeDialog dlg( this, &tmp );
+    pacient tmp = pacientClicked;
+    /*doctorChangeDialog dlg( this, &tmp );
     int result = dlg.exec();
     if ( result==QDialog::Accepted )
     {
         tree.changeData( docClicked, tmp );
         fillRows(); // TODO: fill just this row
-    }
+    }*/
 }
 
-doctorsWidget::~doctorsWidget()
+pacientsWidget::~pacientsWidget()
 {
 
 }

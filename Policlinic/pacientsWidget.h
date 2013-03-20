@@ -2,16 +2,16 @@
 
 #include <QtGui/QWidget>
 #include <QMenu>
-#include "ui_doctorsWidget.h"
-#include "../Structs/policlinic_tree.h"
+#include "ui_pacientsWidget.h"
+#include "../Structs/policlinic_hash.h"
 
-class doctorsWidget : public QWidget
+class pacientsWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    doctorsWidget( QWidget *parent, const QString& filename );
-    ~doctorsWidget();
+    pacientsWidget( QWidget *parent, const QString& filename );
+    ~pacientsWidget();
 
 private slots:
     void cellCLicked( int row, int column );
@@ -22,15 +22,15 @@ private slots:
 
 private:
     void fillRows();
-    void fillRow( doctor& doc, int row );
+    void fillRow( pacient& doc, int row );
 
     QMenu* contextMenu;
     QAction* deleteAction;
     QAction* editAction;
 
-    Tree tree;
-    bool isCacheValid;
-    mutable std::list<doctor> cachedDoctors;
-    doctor docClicked;
-    Ui::DoctorsWidgetForm ui;
+    BigHash hash;
+    //bool isCacheValid;
+    mutable std::list<pacient> cachedPacients;
+    pacient pacientClicked;
+    Ui::PacientsWidgetForm ui;
 };

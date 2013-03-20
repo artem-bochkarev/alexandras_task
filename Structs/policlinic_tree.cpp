@@ -64,8 +64,11 @@ bool Tree::readFromTXT(char const * name)
         fgets(&s[0], 20, file); // empty string
 		
 		doc.priem[strlen((char *)&doc.priem)-1] = 0;
+        win1251toCP866((char *)&doc.priem);
 		doc.dolgnost[strlen((char *)&doc.dolgnost)-1] = 0;
+        win1251toCP866((char *)&doc.dolgnost);
 		doc.fio[strlen((char *)&doc.fio)-1] = 0;
+        win1251toCP866((char *)&doc.fio);
 		add(doc);
 		//printBalances();
 	}
