@@ -7,6 +7,11 @@ bool operator == (reg_num const & p1, reg_num const & p2)
 	return ((p1.num == p2.num)&&(p1.okrug == p2.okrug));
 }
 
+bool operator != (reg_num const & p1, reg_num const & p2)
+{
+	return !(p1 == p2);
+}
+
 bool operator == (pacient const & p1, pacient const & p2)
 {
 	return (p1.number == p2.number);

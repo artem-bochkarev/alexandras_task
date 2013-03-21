@@ -22,6 +22,6 @@ private:
     void workChanged();
     void cabinetChanged();
 
-    Ui::Dialog ui;
+    Ui::DoctorEditDialog ui;
     doctor* doc;
 };

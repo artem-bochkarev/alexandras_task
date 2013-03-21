@@ -5,6 +5,33 @@
     <name>Dialog</name>
     <message>
         <source>Doctor edit</source>
+        <translation type="obsolete">Редактирование врача</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="obsolete">Имя:</translation>
+    </message>
+    <message>
+        <source>Speciality</source>
+        <translation type="obsolete">Специальность</translation>
+    </message>
+    <message>
+        <source>Cabinet</source>
+        <translation type="obsolete">Кабинет</translation>
+    </message>
+    <message>
+        <source>9000; </source>
+        <translation type="obsolete">9000;</translation>
+    </message>
+    <message>
+        <source>Work hours</source>
+        <translation type="obsolete">Часы приема</translation>
+    </message>
+</context>
+<context>
+    <name>DoctorEditDialog</name>
+    <message>
+        <source>Doctor edit</source>
         <translation>Редактирование врача</translation>
     </message>
     <message>
@@ -217,6 +244,41 @@
     </message>
 </context>
 <context>
+    <name>PatientEditDialog</name>
+    <message>
+        <source>Patient edit</source>
+        <translation>Редактирование пациента</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Имя:</translation>
+    </message>
+    <message>
+        <source>Work place:</source>
+        <translation>Место работы(учебы):</translation>
+    </message>
+    <message>
+        <source>ID:</source>
+        <translation>Регистрационный номер:</translation>
+    </message>
+    <message>
+        <source>99 999999; </source>
+        <translation>99 999999; </translation>
+    </message>
+    <message>
+        <source>Birth year:</source>
+        <translation>Год рождения:</translation>
+    </message>
+    <message>
+        <source>D999; </source>
+        <translation>D999; </translation>
+    </message>
+    <message>
+        <source>Address:</source>
+        <translation>Адрес:</translation>
+    </message>
+</context>
+<context>
     <name>doctorsWidget</name>
     <message>
         <source>Delete</source>
@@ -252,6 +314,20 @@
     <message>
         <source>Directions: Don&apos;t know</source>
         <translation>Направления: Нет информации</translation>
+    </message>
+    <message>
+        <source>Another patient( </source>
+        <translation>Другой пациент(</translation>
+    </message>
+    <message>
+        <source> ) have this ID.
+Operation is Invalid</source>
+        <translation>) имеет такой же идентификационный номер.
+Такая операция запрещена</translation>
+    </message>
+    <message>
+        <source>Hospital manager</source>
+        <translation>Управление поликлиникой</translation>
     </message>
 </context>
 </TS>

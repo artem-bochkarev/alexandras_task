@@ -94,14 +94,14 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="addressLabel">
+      <widget class="QLabel" name="idLabel">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Address:</string>
+        <string>ID:</string>
        </property>
       </widget>
      </item>
@@ -120,14 +120,14 @@
     </layout>
    </item>
    <item>
-    <widget class="QLabel" name="idLabel">
+    <widget class="QLabel" name="addressLabel">
      <property name="font">
       <font>
        <pointsize>10</pointsize>
       </font>
      </property>
      <property name="text">
-      <string>ID:</string>
+      <string>Address:</string>
      </property>
     </widget>
    </item>

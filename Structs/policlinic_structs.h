@@ -50,6 +50,7 @@ struct direction
 	some functions for comparisons of structures
 */
 bool operator == (reg_num const & p1, reg_num const & p2);
+bool operator != (reg_num const & p1, reg_num const & p2);
 bool operator == (pacient const & p1, pacient const & p2);
 bool operator == (doctor const & d1, doctor const & d2);
 bool operator != (doctor const & d1, doctor const & d2);

@@ -5,6 +5,33 @@
     <name>Dialog</name>
     <message>
         <source>Doctor edit</source>
+        <translation type="obsolete">Doctors edit</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="obsolete">Name:</translation>
+    </message>
+    <message>
+        <source>Speciality</source>
+        <translation type="obsolete">Speciality</translation>
+    </message>
+    <message>
+        <source>Cabinet</source>
+        <translation type="obsolete">Room</translation>
+    </message>
+    <message>
+        <source>9000; </source>
+        <translation type="obsolete">9000;</translation>
+    </message>
+    <message>
+        <source>Work hours</source>
+        <translation type="obsolete">Working hours</translation>
+    </message>
+</context>
+<context>
+    <name>DoctorEditDialog</name>
+    <message>
+        <source>Doctor edit</source>
         <translation>Doctors edit</translation>
     </message>
     <message>
@@ -25,7 +52,7 @@
     </message>
     <message>
         <source>Work hours</source>
-        <translation>Working hours</translation>
+        <translation>Working time</translation>
     </message>
 </context>
 <context>
@@ -193,6 +220,41 @@
     </message>
 </context>
 <context>
+    <name>PatientEditDialog</name>
+    <message>
+        <source>Patient edit</source>
+        <translation>Patient edit</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Name:</translation>
+    </message>
+    <message>
+        <source>Work place:</source>
+        <translation>Work place:</translation>
+    </message>
+    <message>
+        <source>ID:</source>
+        <translation>Identification number:</translation>
+    </message>
+    <message>
+        <source>99 999999; </source>
+        <translation>99 999999; </translation>
+    </message>
+    <message>
+        <source>Birth year:</source>
+        <translation>Birth year:</translation>
+    </message>
+    <message>
+        <source>D999; </source>
+        <translation>D999; </translation>
+    </message>
+    <message>
+        <source>Address:</source>
+        <translation>Address:</translation>
+    </message>
+</context>
+<context>
     <name>doctorsWidget</name>
     <message>
         <source>Delete</source>
@@ -228,6 +290,21 @@
     <message>
         <source>Directions: Don&apos;t know</source>
         <translation>Directions: Don&apos;t know</translation>
+    </message>
+    <message>
+        <source>Another patient( </source>
+        <translation>Another patient(</translation>
+    </message>
+    <message>
+        <source> ) have this ID.
+Operation is Invalid</source>
+        <translation>) have this id.
+Operation is invalid</translation>
+    </message>
+    <message>
+        <source>Hospital manager</source>
+        <translatorcomment>Hospital manager</translatorcomment>
+        <translation>Hospital manager</translation>
     </message>
 </context>
 </TS>

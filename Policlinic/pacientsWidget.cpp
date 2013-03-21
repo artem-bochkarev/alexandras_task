@@ -1,9 +1,10 @@
 #include "pacientsWidget.h"
-//#include "doctorChangeDialog.h"
+#include "patientEditDialog.h"
 #include <QFile>
 #include <QTextStream>
 #include <QTextCodec>
 #include <QContextMenuEvent>
+#include <QMessageBox>
 #include <string>
 #include <cassert>
 
@@ -121,13 +122,28 @@ void pacientsWidget::deletePressed()
 void pacientsWidget::changePressed()
 {
     pacient tmp = pacientClicked;
-    /*doctorChangeDialog dlg( this, &tmp );
+    patientEditDialog dlg( this, &tmp );
     int result = dlg.exec();
     if ( result==QDialog::Accepted )
     {
-        tree.changeData( docClicked, tmp );
+        //Exit if We have another patient with this number
+        if ( ( tmp.number != pacientClicked.number ) && ( hash.getID(tmp.number) != 0 ) )
+        {
+            QMessageBox msgBox;
+            msgBox.setWindowTitle(tr("Hospital manager"));
+            pacient *p = hash.getID(tmp.number);
+            QByteArray fio(p->fio);
+            QTextCodec *codec = QTextCodec::codecForName("CP866");
+            QString patInfo = codec->toUnicode(fio);
+            patInfo += " " + QString::number(p->birth);
+            msgBox.setText(tr("Another patient( ") + patInfo + tr(" ) have this ID.\nOperation is Invalid") );
+            msgBox.exec();
+            return;
+        }
+        hash.remove( pacientClicked );
+        hash.add( tmp );
         fillRows(); // TODO: fill just this row
-    }*/
+    }
 }
 
 pacientsWidget::~pacientsWidget()
