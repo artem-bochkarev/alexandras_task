@@ -49,3 +49,13 @@ bool operator >= (direction const & d1, direction const & d2)
 {
 	return (strcmp(d1.fio, d2.fio) >= 0);
 }
+
+doctor empty_doctor()
+{
+    doctor doc;
+    doc.cabinet = 0;
+    doc.dolgnost[0] = 0;
+    doc.priem[0] = 0;
+    doc.fio[0] = 0;
+    return doc;
+}

@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
         this, SLOT( openDoctors() ) );
     QObject::connect( ui.actionOpen_patients, SIGNAL( triggered() ),
         this, SLOT( openPatients() ) );
+    QObject::connect( ui.tabWidget, SIGNAL( tabCloseRequested(int) ),
+        this, SLOT( tabCloseRequested( int ) ) );
 }
 
 MainWindow::~MainWindow()
@@ -30,4 +32,9 @@ void MainWindow::openPatients()
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Open pacients file"), "", tr("Text pacient file (*.txt);;Binary pacient files (*.bin)"));
     ui.tabWidget->addTab( new pacientsWidget( this, fileName ), tr("Patients") );
+}
+
+void MainWindow::tabCloseRequested( int index )
+{
+    ui.tabWidget->removeTab( index );
 }

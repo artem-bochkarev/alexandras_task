@@ -14,8 +14,10 @@ doctorsWidget::doctorsWidget( QWidget *parent, const QString& filename )
     contextMenu = new QMenu( this );
     deleteAction = new QAction( tr("Delete"), this );
     editAction = new QAction( tr("Edit"), this );
+    addAction = new QAction( tr("Add"), this );
     contextMenu->addAction( deleteAction );
     contextMenu->addAction( editAction );
+    contextMenu->addAction( addAction );
 
     std::string str = filename.toStdString();
     const char* file = str.c_str();
@@ -30,12 +32,7 @@ doctorsWidget::doctorsWidget( QWidget *parent, const QString& filename )
 
     QObject::connect( deleteAction, SIGNAL(triggered(bool)), this, SLOT( deletePressed() ) );
     QObject::connect( editAction, SIGNAL(triggered(bool)), this, SLOT( changePressed() ) );
-
-    /*QObject::connect( this, SIGNAL( contextMenuEvent( QContextMenuEvent * ) ),
-        this, SLOT( contextMenuRequested( QContextMenuEvent * ) ) );*/
-
-    
-    
+    QObject::connect( addAction, SIGNAL(triggered(bool)), this, SLOT( addPressed() ) );
 
     if ( filename.endsWith( 't' ) )
     {
@@ -119,6 +116,18 @@ void doctorsWidget::changePressed()
     if ( result==QDialog::Accepted )
     {
         tree.changeData( docClicked, tmp );
+        fillRows(); // TODO: fill just this row
+    }
+}
+
+void doctorsWidget::addPressed()
+{
+    doctor tmp = empty_doctor();
+    doctorChangeDialog dlg( this, &tmp );
+    int result = dlg.exec();
+    if ( result==QDialog::Accepted )
+    {
+        tree.add( tmp );
         fillRows(); // TODO: fill just this row
     }
 }

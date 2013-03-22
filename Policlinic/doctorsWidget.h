@@ -18,6 +18,7 @@ private slots:
     void contextMenuEvent( QContextMenuEvent * qEvent );
     void contextMenuRequested( const QPoint& );
     void deletePressed();
+    void addPressed();
     void changePressed();
 
 private:
@@ -27,6 +28,7 @@ private:
     QMenu* contextMenu;
     QAction* deleteAction;
     QAction* editAction;
+    QAction* addAction;
 
     Tree tree;
     bool isCacheValid;

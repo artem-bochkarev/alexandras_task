@@ -15,9 +15,11 @@ public:
 private slots:
     void openDoctors();
     void openPatients();
+    void tabCloseRequested( int );
 
 private:
     Ui::MainWindowClass ui;
+    //QWidget *doctorsWidget, *patientsWidget;
 };
 
 #endif // MAINWINDOW_H
