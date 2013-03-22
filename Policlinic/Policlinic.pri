@@ -1,15 +1,19 @@
-HEADERS += ./doctorChangeDialog.h \
+HEADERS += ./directionsWidget.h \
+    ./doctorChangeDialog.h \
     ./doctorsWidget.h \
     ./pacientsWidget.h \
     ./patientEditDialog.h \
+    ./directionsWidget.h \
     ./mainwindow.h
-SOURCES += ./doctorChangeDialog.cpp \
+SOURCES += ./directionsWidget.cpp \
+    ./doctorChangeDialog.cpp \
     ./doctorsWidget.cpp \
     ./pacientsWidget.cpp \
     ./patientEditDialog.cpp \
     ./main.cpp \
     ./mainwindow.cpp
-FORMS += ./doctorChangeDialog.ui \
+FORMS += ./directionsWidget.ui \
+    ./doctorChangeDialog.ui \
     ./doctorsWidget.ui \
     ./pacientsWidget.ui \
     ./mainwindow.ui \

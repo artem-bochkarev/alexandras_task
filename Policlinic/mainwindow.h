@@ -15,6 +15,7 @@ public:
 private slots:
     void openDoctors();
     void openPatients();
+    void openDirections();
     void tabCloseRequested( int );
 
 private:

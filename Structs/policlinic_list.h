@@ -46,7 +46,7 @@ public:
 	myList();
 	void add(direction dir);                             //adds referral to List
 	iterator begin();                                    //returns iterator to first element
-	iterator end();                                      //returns iterator to last element(be carefull it is syclic list, (begin()==end()))
+	iterator end();                                      //returns iterator to last element(be carefull it is Cyclic list, (begin()==end()))
 	void remove(direction dir);                          //removes referral if it exists
 	void remove (iterator & it);                         //removes refferals by iterator
 	void readFromTxt(const char * str);                  //read referrals from text file
