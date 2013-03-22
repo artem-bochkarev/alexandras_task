@@ -3,14 +3,14 @@
 #include <QtGui/QWidget>
 #include <QMenu>
 #include "ui_directionsWidget.h"
-#include "../Structs/policlinic_list.h"
+#include "../Structs/policlinic_database.h"
 
 class directionsWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    directionsWidget( QWidget *parent, const QString& filename );
+    directionsWidget( QWidget *parent, PoliclinicDatabase& database );
     ~directionsWidget();
 
 private slots:

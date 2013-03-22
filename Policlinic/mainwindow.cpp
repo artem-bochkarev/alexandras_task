@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
         this, SLOT( openPatients() ) );
     QObject::connect( ui.actionOpen_directions, SIGNAL( triggered() ),
         this, SLOT( openDirections() ) );
+    QObject::connect( ui.actionLoad_database, SIGNAL( triggered() ),
+        this, SLOT( loadDatabase() ) );
 
     QObject::connect( ui.tabWidget, SIGNAL( tabCloseRequested(int) ),
         this, SLOT( tabCloseRequested( int ) ) );
@@ -46,6 +48,17 @@ void MainWindow::openDirections()
         tr("Open directions file"), "", tr("Text directions file (*.txt);;Binary directions files (*.bin)"));
     if ( fileName != "" )
         ui.tabWidget->addTab( new directionsWidget( this, fileName ), tr("Directions") );
+}
+
+void MainWindow::loadDatabase()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("Open database file"), "", tr("Text databse file (*.txt)"));
+    if ( fileName != "" )
+    {
+        database.setDatabase( fileName.toStdString().c_str() );
+        database.load();
+    }
 }
 
 void MainWindow::tabCloseRequested( int index )

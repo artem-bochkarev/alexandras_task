@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int BigHash::h_func(reg_num temp)
+int BigHash::h_func(reg_num temp) const
 {
 	return ((int)temp.okrug)%size;
 }
@@ -29,7 +29,7 @@ void BigHash::remove(pacient temp)
 	return;
 }
 
-pacient * BigHash::getID(reg_num num)
+const pacient * BigHash::getID(reg_num num) const
 {
 	int key = h_func(num);
 	if (mas[key] == NULL)

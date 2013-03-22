@@ -126,25 +126,33 @@ void Tree::changeData(doctor oldDoc, doctor newDoc)
 	free(nSample);
 }
 
-void Tree::searchDolg(doctor doc, std::list<doctor> & spisok)
+void Tree::searchDolg(doctor doc, std::list<doctor> & spisok) const
 {
 	lpkDolg(doc, spisok, root);
 }
 
-doctor Tree::searchFIO(doctor doc)
+doctor Tree::searchFIO(const char* fio) const
 {
-	int len = strlen(doc.fio);
-	char * nSample = (char *)malloc((len + 1)*sizeof(char));
-	strcpy(nSample, doc.fio);
-	Node * t = search(nSample, root);
-	free(nSample);
+	Node * t = search(fio, root);
+	doctor tmp;
+    tmp.fio[0] = 0;
 	if (t == NULL)
-		return doc;
+		return tmp;
 	else
 		return t->data;
 }
 
-void Tree::lpkDolg(doctor d, std::list<doctor> & spisok, Node * a)
+doctor Tree::searchFIO(doctor doc) const
+{
+	int len = strlen(doc.fio);
+	char * nSample = (char *)malloc((len + 1)*sizeof(char));
+	strcpy(nSample, doc.fio);
+	doctor res = searchFIO( nSample );
+	free(nSample);
+    return res;
+}
+
+void Tree::lpkDolg(doctor d, std::list<doctor> & spisok, Node * a) const
 {
 	if (a != NULL)
 	{
@@ -195,7 +203,7 @@ void Tree::write(FILE * file, Node * a)
 	}
 }
 
-Tree::Node * Tree::search(char * nSample, Node * a)
+Tree::Node * Tree::search(const char * nSample, Node * a) const
 {
 	if (a == NULL) 
 		return NULL;

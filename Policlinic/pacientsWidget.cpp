@@ -131,7 +131,7 @@ void pacientsWidget::changePressed()
         {
             QMessageBox msgBox;
             msgBox.setWindowTitle(tr("Hospital manager"));
-            pacient *p = hash.getID(tmp.number);
+            const pacient *p = hash.getID(tmp.number);
             QByteArray fio(p->fio);
             QTextCodec *codec = QTextCodec::codecForName("CP866");
             QString patInfo = codec->toUnicode(fio);

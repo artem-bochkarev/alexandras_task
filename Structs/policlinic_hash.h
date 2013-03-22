@@ -30,11 +30,11 @@ private:
 */
 class BigHash
 {
-	int h_func(reg_num temp);                                       //computes hash value
+	int h_func(reg_num temp) const;                                       //computes hash value
 public:
 	bool add(pacient temp);                                         //adds new patient to hash( return true if succeess)
 	void remove(pacient temp);                                      //removes patient from hash
-	pacient * getID(reg_num num);                                   //returns pointer to pacient by his reg_num
+	const pacient * getID(reg_num num) const;                                   //returns pointer to pacient by his reg_num
 	void searchFio(const char * fio, std::list<pacient> & lst);     //searches for patient, result will be placed in list
 	void showAll(std::list<pacient> & lst);     //searches for patient, result will be placed in list
 	BigHash(int max_okrug, int sm_size);                            //constructs new Hash, where sm_size is size for SmallHash

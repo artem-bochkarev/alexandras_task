@@ -67,6 +67,8 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionLoad_database"/>
+    <addaction name="separator"/>
     <addaction name="actionOpen_doctors"/>
     <addaction name="actionOpen_patients"/>
     <addaction name="actionOpen_directions"/>
@@ -102,6 +104,11 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionLoad_database">
+   <property name="text">
+    <string>Load database</string>
    </property>
   </action>
  </widget>

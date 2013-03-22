@@ -3,6 +3,7 @@
 
 #include <QtGui/QMainWindow>
 #include "ui_mainwindow.h"
+#include "../Structs/policlinic_database.h"
 
 class MainWindow : public QMainWindow
 {
@@ -16,11 +17,12 @@ private slots:
     void openDoctors();
     void openPatients();
     void openDirections();
+    void loadDatabase();
     void tabCloseRequested( int );
 
 private:
     Ui::MainWindowClass ui;
-    //QWidget *doctorsWidget, *patientsWidget;
+    PoliclinicDatabase database;
 };
 
 #endif // MAINWINDOW_H

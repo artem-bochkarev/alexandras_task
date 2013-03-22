@@ -28,16 +28,17 @@ public:
 	bool writeToFile(char const * name);                                    //writes doctors info to file
 	void showAll(std::list<doctor> & spisok);                               //puts all doctors to list
 	void changeData(doctor oldDoc, doctor newDoc);                          //makes changes in doctors info
-	void searchDolg(doctor doc, std::list<doctor> & spisok);                //searches for doctors by his profession
-	doctor searchFIO(doctor doc);                                           //searches for doctor by his FIO
-    int size() const;
+	void searchDolg(doctor doc, std::list<doctor> & spisok) const;                //searches for doctors by his profession
+	doctor searchFIO(doctor doc) const;                                           //searches for doctor by his FIO
+	doctor searchFIO(const char*) const;                                          //searches for doctor by his FIO
+	int size() const;
 private:
-	void lpkDolg(doctor d, std::list<doctor> & spisok, Node * a);           //function for search
+	void lpkDolg(doctor d, std::list<doctor> & spisok, Node * a) const;           //function for search
 	void lpk(std::list<doctor> & spisok, Node * a);                         //function for show
 	void klpBal(Node * a);                                                  //function for rebalance
 	void destroy(Node * a);                                                 //function for delete
 	void write(FILE * file, Node * a);                                      //function for write
-	Node * search(char * nSample, Node * a);                                //function for search
+	Node * search(const char * nSample, Node * a) const;                                //function for search
 	int height(Node * a);                                                   //function for balance
 	void balance(Node * a, Node * prev);                                    //balances Node
 	void add(doctor Doc, Node * a, Node * prev);                            //adds node
