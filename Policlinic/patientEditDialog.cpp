@@ -2,8 +2,8 @@
 #include <QTextCodec>
 #include <QTextStream>
 
-patientEditDialog::patientEditDialog( QWidget *parent, pacient* pat )
-    : pat(pat), QDialog(parent)
+patientEditDialog::patientEditDialog( QWidget *parent, pacient* pat, PoliclinicDatabase& database )
+    : pat(pat), QDialog(parent), database(database)
 {
     ui.setupUi(this);
 

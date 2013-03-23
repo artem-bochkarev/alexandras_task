@@ -100,7 +100,7 @@ bool Tree::writeToFile(char const * name)
 	return true;
 }
 
-void Tree::showAll(std::list<doctor> & spisok)
+void Tree::showAll(std::list<doctor> & spisok) const
 {
 	if (root != NULL)
 	{
@@ -126,9 +126,9 @@ void Tree::changeData(doctor oldDoc, doctor newDoc)
 	free(nSample);
 }
 
-void Tree::searchDolg(doctor doc, std::list<doctor> & spisok) const
+void Tree::searchDolg(const char* sample, std::list<doctor> & spisok) const
 {
-	lpkDolg(doc, spisok, root);
+	lpkDolg(sample, spisok, root);
 }
 
 doctor Tree::searchFIO(const char* fio) const
@@ -152,18 +152,18 @@ doctor Tree::searchFIO(doctor doc) const
     return res;
 }
 
-void Tree::lpkDolg(doctor d, std::list<doctor> & spisok, Node * a) const
+void Tree::lpkDolg(const char* sample, std::list<doctor> & spisok, Node * a) const
 {
 	if (a != NULL)
 	{
-		lpkDolg(d, spisok, a->left);
-		if (::search(&d.dolgnost[0], &a->data.dolgnost[0]) == 0)
+		lpkDolg(sample, spisok, a->left);
+		if (::search(sample, &a->data.dolgnost[0]) == 0)
 			spisok.push_back(a->data);
-		lpkDolg(d, spisok, a->right);
+		lpkDolg(sample, spisok, a->right);
 	}
 }
 
-void Tree::lpk(std::list<doctor> & spisok, Node * a)
+void Tree::lpk(std::list<doctor> & spisok, Node * a) const
 {
 	if (a != NULL)
 	{
@@ -430,7 +430,7 @@ Tree::Node * Tree::bigRight(Node * a)
 	return c;
 }
 
-int Tree::size() const
+size_t Tree::size() const
 {
     return count;
 }

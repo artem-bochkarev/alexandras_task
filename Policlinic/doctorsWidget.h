@@ -3,14 +3,14 @@
 #include <QtGui/QWidget>
 #include <QMenu>
 #include "ui_doctorsWidget.h"
-#include "../Structs/policlinic_tree.h"
+#include "../Structs/policlinic_database.h"
 
 class doctorsWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    doctorsWidget( QWidget *parent, const QString& filename );
+    doctorsWidget( QWidget *parent, PoliclinicDatabase& );
     ~doctorsWidget();
 
 private slots:
@@ -30,7 +30,7 @@ private:
     QAction* editAction;
     QAction* addAction;
 
-    Tree tree;
+    PoliclinicDatabase& database;
     bool isCacheValid;
     mutable std::list<doctor> cachedDoctors;
     doctor docClicked;

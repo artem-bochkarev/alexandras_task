@@ -28,26 +28,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::openDoctors()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Open doctors file"), "", tr("Text doctors file (*.txt);;Binary doctors files (*.bin)"));
-    if ( fileName != "" )
-        ui.tabWidget->addTab( new doctorsWidget( this, fileName ), tr("Doctors") );
+    ui.tabWidget->addTab( new doctorsWidget( this, database ), tr("Doctors") );
 }
 
 void MainWindow::openPatients()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Open pacients file"), "", tr("Text pacient file (*.txt);;Binary pacient files (*.bin)"));
-    if ( fileName != "" )
-        ui.tabWidget->addTab( new pacientsWidget( this, fileName ), tr("Patients") );
+    ui.tabWidget->addTab( new pacientsWidget( this, database ), tr("Patients") );
 }
 
 void MainWindow::openDirections()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Open directions file"), "", tr("Text directions file (*.txt);;Binary directions files (*.bin)"));
-    if ( fileName != "" )
-        ui.tabWidget->addTab( new directionsWidget( this, fileName ), tr("Directions") );
+        ui.tabWidget->addTab( new directionsWidget( this, database ), tr("Directions") );
 }
 
 void MainWindow::loadDatabase()
@@ -56,7 +47,9 @@ void MainWindow::loadDatabase()
         tr("Open database file"), "", tr("Text databse file (*.txt)"));
     if ( fileName != "" )
     {
-        database.setDatabase( fileName.toStdString().c_str() );
+        QFileInfo fInfo(fileName);
+        QString dir(fInfo.absoluteDir().absolutePath()), name(fInfo.fileName());
+        database.setDatabase( dir.toStdString(), name.toStdString() );
         database.load();
     }
 }

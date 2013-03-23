@@ -8,8 +8,8 @@
 #include <string>
 #include <cassert>
 
-pacientsWidget::pacientsWidget( QWidget *parent, const QString& filename )
-    : QWidget(parent), hash(3, 2)
+pacientsWidget::pacientsWidget( QWidget *parent, PoliclinicDatabase& database )
+    : QWidget(parent), database(database)
 {
     ui.setupUi(this);
 
@@ -18,9 +18,6 @@ pacientsWidget::pacientsWidget( QWidget *parent, const QString& filename )
     editAction = new QAction( tr("Edit"), this );
     contextMenu->addAction( deleteAction );
     contextMenu->addAction( editAction );
-
-    std::string str = filename.toStdString();
-    const char* file = str.c_str();
 
     setContextMenuPolicy( Qt::NoContextMenu );
     ui.tableWidget->setContextMenuPolicy( Qt::CustomContextMenu );
@@ -36,17 +33,6 @@ pacientsWidget::pacientsWidget( QWidget *parent, const QString& filename )
     /*QObject::connect( this, SIGNAL( contextMenuEvent( QContextMenuEvent * ) ),
         this, SLOT( contextMenuRequested( QContextMenuEvent * ) ) );*/
 
-    
-    
-
-    if ( filename.endsWith( 't' ) )
-    {
-        hash.readFromWinTXT( file );
-    }else
-    {
-        
-        //tree.readFromFile( file );
-    }
     fillRows();
 }
 
@@ -67,9 +53,9 @@ void pacientsWidget::fillRow( pacient& pac, int row )
 void pacientsWidget::fillRows()
 {
     ui.tableWidget->clearContents();
-    ui.tableWidget->setRowCount( hash.getSize() );
+    ui.tableWidget->setRowCount( database.getPatients().size() );
     cachedPacients.clear();
-    hash.showAll( cachedPacients );
+    database.getPatients().showAll( cachedPacients );
     std::list<pacient>::iterator iter = cachedPacients.begin();
     int row = 0;
     for ( ; iter != cachedPacients.end(); ++iter )
@@ -115,23 +101,23 @@ void pacientsWidget::contextMenuRequested( const QPoint& point )
 
 void pacientsWidget::deletePressed()
 {
-    hash.remove(pacientClicked);
+    database.getPatients().remove(pacientClicked);
     fillRows();
 }
 
 void pacientsWidget::changePressed()
 {
     pacient tmp = pacientClicked;
-    patientEditDialog dlg( this, &tmp );
+    patientEditDialog dlg( this, &tmp, database );
     int result = dlg.exec();
     if ( result==QDialog::Accepted )
     {
         //Exit if We have another patient with this number
-        if ( ( tmp.number != pacientClicked.number ) && ( hash.getID(tmp.number) != 0 ) )
+        if ( ( tmp.number != pacientClicked.number ) && ( database.getPatients().getID(tmp.number) != 0 ) )
         {
             QMessageBox msgBox;
             msgBox.setWindowTitle(tr("Hospital manager"));
-            const pacient *p = hash.getID(tmp.number);
+            const pacient *p = database.getPatients().getID(tmp.number);
             QByteArray fio(p->fio);
             QTextCodec *codec = QTextCodec::codecForName("CP866");
             QString patInfo = codec->toUnicode(fio);
@@ -140,8 +126,8 @@ void pacientsWidget::changePressed()
             msgBox.exec();
             return;
         }
-        hash.remove( pacientClicked );
-        hash.add( tmp );
+        database.getPatients().remove( pacientClicked );
+        database.getPatients().add( tmp );
         fillRows(); // TODO: fill just this row
     }
 }

@@ -3,14 +3,14 @@
 #include <QtGui/QDialog>
 #include <QMenu>
 #include "ui_patientEditDialog.h"
-#include "../Structs/policlinic_structs.h"
+#include "../Structs/policlinic_database.h"
 
 class patientEditDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    patientEditDialog( QWidget* , pacient* );
+    patientEditDialog( QWidget* , pacient*, PoliclinicDatabase& );
     ~patientEditDialog();
 
 private slots:
@@ -25,4 +25,5 @@ private:
 
     Ui::PatientEditDialog ui;
     pacient* pat;
+    PoliclinicDatabase& database;
 };

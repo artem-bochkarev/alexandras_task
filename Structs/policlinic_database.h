@@ -6,6 +6,7 @@
 #include "policlinic_tree.h"
 
 #include <string>
+#include <list>
 
 class PoliclinicDatabase
 {
@@ -18,7 +19,10 @@ public:
 
     const pacient* getPatientByDirection( direction& ) const;
     const doctor*  getDoctorByDirection ( direction& ) const;
-    void setDatabase( const char * );
+    void setDatabase( std::string&, std::string& );
+    std::list<std::string> getDoctorsSpecialities() const;
+    std::list<int> getAreas() const;
+    std::list<int> getNumbers( int area ) const;
     void load();
     void save();
 private:
@@ -27,4 +31,5 @@ private:
     myList directions;
     mutable doctor tmp;
     std::string fileName;
+    std::string directoryName;
 };

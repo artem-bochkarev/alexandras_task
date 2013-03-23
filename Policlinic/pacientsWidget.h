@@ -3,14 +3,14 @@
 #include <QtGui/QWidget>
 #include <QMenu>
 #include "ui_pacientsWidget.h"
-#include "../Structs/policlinic_hash.h"
+#include "../Structs/policlinic_database.h"
 
 class pacientsWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    pacientsWidget( QWidget *parent, const QString& filename );
+    pacientsWidget( QWidget *parent, PoliclinicDatabase& );
     ~pacientsWidget();
 
 private slots:
@@ -28,8 +28,7 @@ private:
     QAction* deleteAction;
     QAction* editAction;
 
-    BigHash hash;
-    //bool isCacheValid;
+    PoliclinicDatabase& database;
     mutable std::list<pacient> cachedPacients;
     pacient pacientClicked;
     Ui::PacientsWidgetForm ui;

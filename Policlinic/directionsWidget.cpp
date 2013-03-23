@@ -1,5 +1,5 @@
 #include "directionsWidget.h"
-#include "patientEditDialog.h"
+#include "directionEditDialog.h"
 #include <QFile>
 #include <QTextStream>
 #include <QTextCodec>
@@ -8,19 +8,18 @@
 #include <string>
 #include <cassert>
 
-directionsWidget::directionsWidget( QWidget *parent, const QString& filename )
-    : QWidget(parent)
+directionsWidget::directionsWidget( QWidget *parent, PoliclinicDatabase& database )
+    : QWidget(parent), database(database)
 {
     ui.setupUi(this);
 
     contextMenu = new QMenu( this );
     deleteAction = new QAction( tr("Delete"), this );
     editAction = new QAction( tr("Edit"), this );
+    addAction = new QAction( tr("Add"), this );
     contextMenu->addAction( deleteAction );
     contextMenu->addAction( editAction );
-
-    std::string str = filename.toStdString();
-    const char* file = str.c_str();
+    contextMenu->addAction( addAction );
 
     setContextMenuPolicy( Qt::NoContextMenu );
     ui.tableWidget->setContextMenuPolicy( Qt::CustomContextMenu );
@@ -32,15 +31,8 @@ directionsWidget::directionsWidget( QWidget *parent, const QString& filename )
 
     QObject::connect( deleteAction, SIGNAL(triggered(bool)), this, SLOT( deletePressed() ) );
     QObject::connect( editAction, SIGNAL(triggered(bool)), this, SLOT( changePressed() ) );
+    QObject::connect( addAction, SIGNAL(triggered(bool)), this, SLOT( addPressed() ) );
 
-    if ( filename.endsWith( 't' ) )
-    {
-        list.readFromTxt( file );
-    }else
-    {
-        
-        //tree.readFromFile( file );
-    }
     fillRows();
 }
 
@@ -62,21 +54,21 @@ void directionsWidget::fillRow( direction& dir, int row )
 void directionsWidget::fillRows()
 {
     ui.tableWidget->clearContents();
-    ui.tableWidget->setRowCount( list.size() );
+    ui.tableWidget->setRowCount( database.getDirections().size() );
 
     int row = 0;
-    myList::iterator iter = list.begin();
+    myList::iterator iter = database.getDirections().begin();
     do
     {
         fillRow( *iter, row );
         ++iter;
         ++row;
-    }while ( iter != list.end() );
+    }while ( iter != database.getDirections().end() );
 }
 
 void directionsWidget::cellCLicked(int row, int column)
 {
-    myList::iterator iter = list.begin();
+    myList::iterator iter = database.getDirections().begin();
     for ( int i=0; i<row; ++i )
         ++iter;
     QByteArray fio(iter->fio), time(iter->time), date(iter->date);
@@ -86,11 +78,32 @@ void directionsWidget::cellCLicked(int row, int column)
     QString numberStr;
     numberStr.sprintf("%02i %06i", iter->number.okrug, iter->number.num);
     
-    ui.dateLabel->setText( codec->toUnicode( date ) );
-    ui.doctorLabel->setText( codec->toUnicode(fio) );
-    ui.patientLabel->setText( numberStr );
-    ui.roomLabel->setText( QString::number(0) );
-    ui.timeLabel->setText( codec->toUnicode( time ) );
+    ui.dateLabel->setText( tr("Date: ") + codec->toUnicode( date ) );
+    QString doctorInfo( codec->toUnicode(fio) + ", " );
+    const doctor* pDoc = database.getDoctorByDirection( *iter );
+    if ( pDoc == 0 )
+    {
+        doctorInfo = tr("No such doctor in database");
+        ui.roomLabel->setText( tr("Cabinet: ") + QString::number(0) );
+    }
+    else
+    {
+        doctorInfo += codec->toUnicode( QByteArray(pDoc->dolgnost) );
+        ui.roomLabel->setText( tr("Cabinet: ") + QString::number(pDoc->cabinet) );
+    }
+
+    const pacient* pPac = database.getPatientByDirection( *iter );
+    if ( pPac == 0 )
+    {
+        ui.patientLabel->setText( numberStr );
+    }
+    else
+    {
+        ui.patientLabel->setText( numberStr + ": " + codec->toUnicode( QByteArray(pPac->fio) ) );
+    }
+    
+    ui.doctorLabel->setText(doctorInfo);
+    ui.timeLabel->setText( tr("Time: ") + codec->toUnicode( time ) );
 
     directionClicked = iter;
 }
@@ -108,41 +121,32 @@ void directionsWidget::contextMenuRequested( const QPoint& point )
 
 void directionsWidget::deletePressed()
 {
-    list.remove( directionClicked );
+    database.getDirections().remove( directionClicked );
     fillRows();
 }
 
 void directionsWidget::addPressed()
 {
     //list.remove( directionClicked );
+    directionEditDialog dlg( this, 0, database );
+    int result = dlg.exec();
+    if ( result==QDialog::Accepted )
+        sort(database.getDirections().begin(), database.getDirections().end());
     fillRows();
 }
 
 void directionsWidget::changePressed()
 {
     direction tmp = *directionClicked;
-    /*patientEditDialog dlg( this, &tmp );
+    directionEditDialog dlg( this, &tmp, database );
     int result = dlg.exec();
     if ( result==QDialog::Accepted )
     {
-        //Exit if We have another patient with this number
-        if ( ( tmp.number != directionClicked.number ) && ( hash.getID(tmp.number) != 0 ) )
-        {
-            QMessageBox msgBox;
-            msgBox.setWindowTitle(tr("Hospital manager"));
-            direction *p = hash.getID(tmp.number);
-            QByteArray fio(p->fio);
-            QTextCodec *codec = QTextCodec::codecForName("CP866");
-            QString patInfo = codec->toUnicode(fio);
-            patInfo += " " + QString::number(p->birth);
-            msgBox.setText(tr("Another patient( ") + patInfo + tr(" ) have this ID.\nOperation is Invalid") );
-            msgBox.exec();
-            return;
-        }
-        hash.remove( directionClicked );
-        hash.add( tmp );
+        database.getDirections().remove(directionClicked);
+        database.getDirections().add(tmp);
+        sort(database.getDirections().begin(), database.getDirections().end());
         fillRows(); // TODO: fill just this row
-    }*/
+    }
 }
 
 directionsWidget::~directionsWidget()

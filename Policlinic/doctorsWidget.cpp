@@ -6,8 +6,8 @@
 #include <QContextMenuEvent>
 #include <string>
 
-doctorsWidget::doctorsWidget( QWidget *parent, const QString& filename )
-    : QWidget(parent)
+doctorsWidget::doctorsWidget( QWidget *parent, PoliclinicDatabase& database )
+    : QWidget(parent), database(database)
 {
     ui.setupUi(this);
 
@@ -18,9 +18,6 @@ doctorsWidget::doctorsWidget( QWidget *parent, const QString& filename )
     contextMenu->addAction( deleteAction );
     contextMenu->addAction( editAction );
     contextMenu->addAction( addAction );
-
-    std::string str = filename.toStdString();
-    const char* file = str.c_str();
 
     setContextMenuPolicy( Qt::NoContextMenu );
     ui.tableWidget->setContextMenuPolicy( Qt::CustomContextMenu );
@@ -34,13 +31,6 @@ doctorsWidget::doctorsWidget( QWidget *parent, const QString& filename )
     QObject::connect( editAction, SIGNAL(triggered(bool)), this, SLOT( changePressed() ) );
     QObject::connect( addAction, SIGNAL(triggered(bool)), this, SLOT( addPressed() ) );
 
-    if ( filename.endsWith( 't' ) )
-    {
-        tree.readFromTXT( file );
-    }else
-    {
-        tree.readFromFile( file );
-    }
     fillRows();
 }
 
@@ -61,9 +51,9 @@ void doctorsWidget::fillRow( doctor& doc, int row )
 void doctorsWidget::fillRows()
 {
     ui.tableWidget->clearContents();
-    ui.tableWidget->setRowCount( tree.size() );
+    ui.tableWidget->setRowCount( database.getDoctors().size() );
     cachedDoctors.clear();
-    tree.showAll( cachedDoctors );
+    database.getDoctors().showAll( cachedDoctors );
     std::list<doctor>::iterator iter = cachedDoctors.begin();
     int row = 0;
     for ( ; iter != cachedDoctors.end(); ++iter )
@@ -104,7 +94,7 @@ void doctorsWidget::contextMenuRequested( const QPoint& point )
 
 void doctorsWidget::deletePressed()
 {
-    tree.remove( docClicked );
+    database.getDoctors().remove( docClicked );
     fillRows();
 }
 
@@ -115,7 +105,7 @@ void doctorsWidget::changePressed()
     int result = dlg.exec();
     if ( result==QDialog::Accepted )
     {
-        tree.changeData( docClicked, tmp );
+        database.getDoctors().changeData( docClicked, tmp );
         fillRows(); // TODO: fill just this row
     }
 }
@@ -127,7 +117,7 @@ void doctorsWidget::addPressed()
     int result = dlg.exec();
     if ( result==QDialog::Accepted )
     {
-        tree.add( tmp );
+        database.getDoctors().add( tmp );
         fillRows(); // TODO: fill just this row
     }
 }

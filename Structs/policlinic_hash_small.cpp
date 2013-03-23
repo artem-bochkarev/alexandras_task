@@ -83,3 +83,18 @@ SmallHash::~SmallHash()
 			delete mas[i];
 	delete mas;
 }
+
+std::list<int> SmallHash::getNumbers()
+{
+    std::list<int> result;
+    for ( int i=0; i<size; ++i )
+    {
+        if ( mas[i] != NULL )
+        {
+            std::list<pacient>::iterator it = mas[i]->begin();
+            for ( ;it!=mas[i]->end(); ++it)
+                result.push_back( it->number.num );
+        }
+    }
+    return result;
+}

@@ -16,6 +16,7 @@ public:
 	void remove(pacient temp);                                      //removes patient from hash
 	pacient * getID(reg_num num);                                   //returns pointer to pacient by his reg_num
 	void searchFIO(const char * fio, std::list<pacient> & lst);     //searches for patient, result will be placed in list
+    std::list<int> getNumbers();
 	SmallHash(int n);
 	~SmallHash();
 private:
@@ -41,10 +42,12 @@ public:
 	~BigHash();
 	void readFromWinTXT(const char * name);                         //reads patients from file
 	void clear();                                                   //clears hash
-	size_t getSize();                                               //returns size of Hash
+	size_t size();                                                  //returns number of elements in Hash
+    std::list<int> getAreas() const;                                //return list of not empty areas
+    std::list<int> getNumbers(int area) const;
 private:
 	SmallHash ** mas;
-	int size, s_size;
+	int m_size, s_size;
 	size_t count;
 };
 #endif

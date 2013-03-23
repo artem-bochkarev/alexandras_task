@@ -5,7 +5,7 @@
 
 int BigHash::h_func(reg_num temp) const
 {
-	return ((int)temp.okrug)%size;
+	return ((int)temp.okrug)%m_size;
 }
 
 bool BigHash::add(pacient temp)
@@ -39,7 +39,7 @@ const pacient * BigHash::getID(reg_num num) const
 
 void BigHash::searchFio(const char * fio, std::list<pacient> & lst)
 {
-	for (int i=0; i<size; ++i)
+	for (int i=0; i<m_size; ++i)
 		if (mas[i] != NULL)
 		{
 			mas[i]->searchFIO(fio, lst);
@@ -48,7 +48,7 @@ void BigHash::searchFio(const char * fio, std::list<pacient> & lst)
 
 void BigHash::showAll(std::list<pacient> & lst)
 {
-	for (int i=0; i<size; ++i)
+	for (int i=0; i<m_size; ++i)
 		if (mas[i] != NULL)
 		{
 			mas[i]->searchFIO("", lst);
@@ -59,16 +59,16 @@ BigHash::BigHash(int max_okrug, int sm_size)
 {
 	count = 0;
 	mas = new SmallHash * [max_okrug];
-	size = max_okrug;
+	m_size = max_okrug;
 	s_size = sm_size;
-	for (int i=0; i<size; ++i)
+	for (int i=0; i<m_size; ++i)
 		mas[i] = NULL;
-	size = max_okrug;
+	m_size = max_okrug;
 }
 
 BigHash::~BigHash()
 {
-	for (int i=0; i<size; ++i)
+	for (int i=0; i<m_size; ++i)
 		if (mas[i] != NULL)
 			delete mas[i];
 	delete mas;
@@ -109,7 +109,7 @@ void BigHash::readFromWinTXT(const char * name)
 
 void BigHash::clear()
 {
-	for (int i=0; i<size; ++i)
+	for (int i=0; i<m_size; ++i)
 		if (mas[i] != NULL)
 		{
 			delete mas[i];
@@ -118,7 +118,26 @@ void BigHash::clear()
 	count = 0;
 }
 
-size_t BigHash::getSize()
+size_t BigHash::size()
 {
 	return count;
+}
+
+std::list<int> BigHash::getAreas() const
+{
+    std::list<int> result;
+    for (int i=0; i<m_size; ++i)
+		if (mas[i] != NULL)
+            result.push_back(i);
+    return result;
+}
+
+std::list<int> BigHash::getNumbers(int index) const
+{
+    std::list<int> result;
+	if (mas[index] != NULL)
+    {
+        return mas[index]->getNumbers();
+    }
+    return result;
 }

@@ -30,7 +30,7 @@ private:
     QAction* editAction;
     QAction* addAction;
 
-    myList list;
+    PoliclinicDatabase& database;
     mutable std::list<direction> cachedDirections;
     myList::iterator directionClicked;
     Ui::DirectionsWidgetForm ui;
