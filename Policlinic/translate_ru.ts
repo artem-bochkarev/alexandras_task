@@ -29,6 +29,80 @@
     </message>
 </context>
 <context>
+    <name>DirectionEditDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation>Окно</translation>
+    </message>
+    <message>
+        <source>Doctor:</source>
+        <translation>Врач:</translation>
+    </message>
+    <message>
+        <source>Patient:</source>
+        <translation>Пациент:</translation>
+    </message>
+    <message>
+        <source>Area</source>
+        <translation>Округ</translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation>Номер</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Дата</translation>
+    </message>
+    <message>
+        <source>dd.MM.yyyy</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Время</translation>
+    </message>
+    <message>
+        <source>hh:mm</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Cabinet:</source>
+        <translation>Кабинет:</translation>
+    </message>
+</context>
+<context>
+    <name>DirectionsWidgetForm</name>
+    <message>
+        <source>Directions</source>
+        <translation>Направления</translation>
+    </message>
+    <message>
+        <source>Doctor</source>
+        <translation>Врач</translation>
+    </message>
+    <message>
+        <source>Patient id</source>
+        <translation>Регистрационный номер пациента</translation>
+    </message>
+    <message>
+        <source>Patient</source>
+        <translation>Пациент</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Дата</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Время</translation>
+    </message>
+    <message>
+        <source>Room</source>
+        <translation>Кабинет</translation>
+    </message>
+</context>
+<context>
     <name>DoctorEditDialog</name>
     <message>
         <source>Doctor edit</source>
@@ -142,11 +216,11 @@
     </message>
     <message>
         <source>Open doctors file</source>
-        <translation>Открыть файл с врачами</translation>
+        <translation type="obsolete">Открыть файл с врачами</translation>
     </message>
     <message>
         <source>Text doctors file (*.txt);;Binary doctors files (*.bin)</source>
-        <translation>Текстовый файлс врачами (*.txt);;Бинарный файл с врачами (*.bin)</translation>
+        <translation type="obsolete">Текстовый файлс врачами (*.txt);;Бинарный файл с врачами (*.bin)</translation>
     </message>
     <message>
         <source>Doctors</source>
@@ -154,15 +228,31 @@
     </message>
     <message>
         <source>Open pacients file</source>
-        <translation>Открыть файл с пациентами</translation>
+        <translation type="obsolete">Открыть файл с пациентами</translation>
     </message>
     <message>
         <source>Text pacient file (*.txt);;Binary pacient files (*.bin)</source>
-        <translation>Текстовый файл с пациентами (*.txt);;Бинарный файл с пациентами (*.bin)</translation>
+        <translation type="obsolete">Текстовый файл с пациентами (*.txt);;Бинарный файл с пациентами (*.bin)</translation>
     </message>
     <message>
         <source>Patients</source>
         <translation>Пациенты</translation>
+    </message>
+    <message>
+        <source>Directions</source>
+        <translation>Направления</translation>
+    </message>
+    <message>
+        <source>Open database file</source>
+        <translation>Открыть базу</translation>
+    </message>
+    <message>
+        <source>Text databse file (*.txt)</source>
+        <translation type="obsolete">Текстовая база данных</translation>
+    </message>
+    <message>
+        <source>Text databse file</source>
+        <translation>Текстовая база</translation>
     </message>
 </context>
 <context>
@@ -198,6 +288,10 @@
     <message>
         <source>Exit</source>
         <translation>Выход</translation>
+    </message>
+    <message>
+        <source>Load database</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -279,6 +373,60 @@
     </message>
 </context>
 <context>
+    <name>directionEditDialog</name>
+    <message>
+        <source>Something not entered</source>
+        <translation>Указаны не все необходимые данные</translation>
+    </message>
+    <message>
+        <source>Do you want to exit without saving?</source>
+        <translation>Пи закрытии окна все изменения будут утеряны. Продолжить?</translation>
+    </message>
+</context>
+<context>
+    <name>directionsWidget</name>
+    <message>
+        <source>Delete</source>
+        <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Редактировать</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Добавить</translation>
+    </message>
+    <message>
+        <source>Date: </source>
+        <translation type="obsolete">Дата: </translation>
+    </message>
+    <message>
+        <source>No such doctor in database</source>
+        <translation>Данный врач не содержится в базе</translation>
+    </message>
+    <message>
+        <source>Cabinet: </source>
+        <translation type="obsolete">Кабинет:</translation>
+    </message>
+    <message>
+        <source>Time: </source>
+        <translation type="obsolete">Время: </translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Дата</translation>
+    </message>
+    <message>
+        <source>Cabinet</source>
+        <translation>Кабинет</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Время</translation>
+    </message>
+</context>
+<context>
     <name>doctorsWidget</name>
     <message>
         <source>Delete</source>
@@ -290,7 +438,7 @@
     </message>
     <message>
         <source>Cabinet: </source>
-        <translation>Кабинет:</translation>
+        <translation type="obsolete">Кабинет:</translation>
     </message>
     <message>
         <source>Directions: Don&apos;t know</source>
@@ -298,7 +446,19 @@
     </message>
     <message>
         <source>Work hours: </source>
-        <translation>Часы приема:</translation>
+        <translation type="obsolete">Часы приема:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Добавить</translation>
+    </message>
+    <message>
+        <source>Cabinet</source>
+        <translation>Кабинет</translation>
+    </message>
+    <message>
+        <source>Work hours</source>
+        <translation>Часы приема</translation>
     </message>
 </context>
 <context>

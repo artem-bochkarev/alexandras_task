@@ -29,6 +29,80 @@
     </message>
 </context>
 <context>
+    <name>DirectionEditDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation>Dialog</translation>
+    </message>
+    <message>
+        <source>Doctor:</source>
+        <translation>Doctor:</translation>
+    </message>
+    <message>
+        <source>Patient:</source>
+        <translation>Patient:</translation>
+    </message>
+    <message>
+        <source>Area</source>
+        <translation>Area</translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation>Number</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Date</translation>
+    </message>
+    <message>
+        <source>dd.MM.yyyy</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Time</translation>
+    </message>
+    <message>
+        <source>hh:mm</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Cabinet:</source>
+        <translation>Room:</translation>
+    </message>
+</context>
+<context>
+    <name>DirectionsWidgetForm</name>
+    <message>
+        <source>Directions</source>
+        <translation>Directions</translation>
+    </message>
+    <message>
+        <source>Doctor</source>
+        <translation>Doctor</translation>
+    </message>
+    <message>
+        <source>Patient id</source>
+        <translation>Patien id</translation>
+    </message>
+    <message>
+        <source>Patient</source>
+        <translation>Patient</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Date</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Time</translation>
+    </message>
+    <message>
+        <source>Room</source>
+        <translation>Room</translation>
+    </message>
+</context>
+<context>
     <name>DoctorEditDialog</name>
     <message>
         <source>Doctor edit</source>
@@ -118,11 +192,11 @@
     </message>
     <message>
         <source>Open doctors file</source>
-        <translation>Open doctors file</translation>
+        <translation type="obsolete">Open doctors file</translation>
     </message>
     <message>
         <source>Text doctors file (*.txt);;Binary doctors files (*.bin)</source>
-        <translation>Opent text doctors file (*.txt);;Binary doctors file (*.bin)</translation>
+        <translation type="obsolete">Opent text doctors file (*.txt);;Binary doctors file (*.bin)</translation>
     </message>
     <message>
         <source>Doctors</source>
@@ -130,15 +204,31 @@
     </message>
     <message>
         <source>Open pacients file</source>
-        <translation>Open patients fil</translation>
+        <translation type="obsolete">Open patients fil</translation>
     </message>
     <message>
         <source>Text pacient file (*.txt);;Binary pacient files (*.bin)</source>
-        <translation>Text patients file (*.txt);;Binary patients file (*.bin)</translation>
+        <translation type="obsolete">Text patients file (*.txt);;Binary patients file (*.bin)</translation>
     </message>
     <message>
         <source>Patients</source>
         <translation>Patients</translation>
+    </message>
+    <message>
+        <source>Directions</source>
+        <translation>Directions</translation>
+    </message>
+    <message>
+        <source>Open database file</source>
+        <translation>Open database file</translation>
+    </message>
+    <message>
+        <source>Text databse file (*.txt)</source>
+        <translation type="obsolete">Text database file</translation>
+    </message>
+    <message>
+        <source>Text databse file</source>
+        <translation>Text database file</translation>
     </message>
 </context>
 <context>
@@ -174,6 +264,10 @@
     <message>
         <source>Exit</source>
         <translation>Exit</translation>
+    </message>
+    <message>
+        <source>Load database</source>
+        <translation>Load database</translation>
     </message>
 </context>
 <context>
@@ -255,6 +349,60 @@
     </message>
 </context>
 <context>
+    <name>directionEditDialog</name>
+    <message>
+        <source>Something not entered</source>
+        <translation>Some information didn&apos;t entered</translation>
+    </message>
+    <message>
+        <source>Do you want to exit without saving?</source>
+        <translation>Do you want to exit without saving?</translation>
+    </message>
+</context>
+<context>
+    <name>directionsWidget</name>
+    <message>
+        <source>Delete</source>
+        <translation>Delete</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Edit</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Add</translation>
+    </message>
+    <message>
+        <source>Date: </source>
+        <translation type="obsolete">Date: </translation>
+    </message>
+    <message>
+        <source>No such doctor in database</source>
+        <translation>No such doctor in database</translation>
+    </message>
+    <message>
+        <source>Cabinet: </source>
+        <translation type="obsolete">Room:</translation>
+    </message>
+    <message>
+        <source>Time: </source>
+        <translation type="obsolete">Time: </translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Date</translation>
+    </message>
+    <message>
+        <source>Cabinet</source>
+        <translation>Room</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Time</translation>
+    </message>
+</context>
+<context>
     <name>doctorsWidget</name>
     <message>
         <source>Delete</source>
@@ -266,7 +414,7 @@
     </message>
     <message>
         <source>Cabinet: </source>
-        <translation>Room:</translation>
+        <translation type="obsolete">Room:</translation>
     </message>
     <message>
         <source>Directions: Don&apos;t know</source>
@@ -274,7 +422,19 @@
     </message>
     <message>
         <source>Work hours: </source>
-        <translation>Working time:</translation>
+        <translation type="obsolete">Working time:</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Add</translation>
+    </message>
+    <message>
+        <source>Cabinet</source>
+        <translation>Room</translation>
+    </message>
+    <message>
+        <source>Work hours</source>
+        <translation>Work hours</translation>
     </message>
 </context>
 <context>

@@ -73,11 +73,11 @@ void doctorsWidget::cellCLicked(int row, int column)
     
     //QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
     QTextCodec *codec = QTextCodec::codecForName("CP866");
-    ui.cabinetLabel->setText( tr("Cabinet: ") + QString::number( iter->cabinet ) );
+    ui.cabinetLabel->setText( tr("Cabinet") + ": " + QString::number( iter->cabinet ) );
     ui.directLabel->setText( tr("Directions: Don't know") );
     ui.nameLabel->setText( codec->toUnicode(fio) );
     ui.specLabel->setText( codec->toUnicode(dolgnost) );
-    ui.workLabel->setText( tr("Work hours: ") + codec->toUnicode( hours ) );
+    ui.workLabel->setText( tr("Work hours") + ": " + codec->toUnicode( hours ) );
     docClicked = *iter;
 }
 

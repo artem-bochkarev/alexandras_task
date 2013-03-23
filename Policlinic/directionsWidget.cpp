@@ -78,18 +78,18 @@ void directionsWidget::cellCLicked(int row, int column)
     QString numberStr;
     numberStr.sprintf("%02i %06i", iter->number.okrug, iter->number.num);
     
-    ui.dateLabel->setText( tr("Date: ") + codec->toUnicode( date ) );
+    ui.dateLabel->setText( tr("Date") + ": " + codec->toUnicode( date ) );
     QString doctorInfo( codec->toUnicode(fio) + ", " );
     const doctor* pDoc = database.getDoctorByDirection( *iter );
     if ( pDoc == 0 )
     {
         doctorInfo = tr("No such doctor in database");
-        ui.roomLabel->setText( tr("Cabinet: ") + QString::number(0) );
+        ui.roomLabel->setText( tr("Cabinet") + ": " + QString::number(0) );
     }
     else
     {
         doctorInfo += codec->toUnicode( QByteArray(pDoc->dolgnost) );
-        ui.roomLabel->setText( tr("Cabinet: ") + QString::number(pDoc->cabinet) );
+        ui.roomLabel->setText( tr("Cabinet") + ": " + QString::number(pDoc->cabinet) );
     }
 
     const pacient* pPac = database.getPatientByDirection( *iter );
@@ -103,7 +103,7 @@ void directionsWidget::cellCLicked(int row, int column)
     }
     
     ui.doctorLabel->setText(doctorInfo);
-    ui.timeLabel->setText( tr("Time: ") + codec->toUnicode( time ) );
+    ui.timeLabel->setText( tr("Time") + ": " + codec->toUnicode( time ) );
 
     directionClicked = iter;
 }

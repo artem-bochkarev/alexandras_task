@@ -44,7 +44,7 @@ void MainWindow::openDirections()
 void MainWindow::loadDatabase()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Open database file"), "", tr("Text databse file (*.txt)"));
+        tr("Open database file"), "", tr("Text databse file") +  "(*.txt)");
     if ( fileName != "" )
     {
         QFileInfo fInfo(fileName);
