@@ -4,8 +4,8 @@
 #include "directionsWidget.h"
 #include <QFileDialog>
 
-MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
-    : QMainWindow(parent, flags)
+MainWindow::MainWindow(Tools::Logger& logger, QWidget *parent, Qt::WFlags flags)
+    : QMainWindow(parent, flags), logger(logger), database(logger)
 {
     ui.setupUi(this);
     QObject::connect( ui.actionOpen_doctors, SIGNAL( triggered() ),
@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
 
     QObject::connect( ui.tabWidget, SIGNAL( tabCloseRequested(int) ),
         this, SLOT( tabCloseRequested( int ) ) );
+    logger << "MainWindow constructed\n";
 }
 
 MainWindow::~MainWindow()
@@ -28,17 +29,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::openDoctors()
 {
-    ui.tabWidget->addTab( new doctorsWidget( this, database ), tr("Doctors") );
+    logger << "Doctors showed\n";
+    ui.tabWidget->addTab( new doctorsWidget( this, database, logger ), tr("Doctors") );
 }
 
 void MainWindow::openPatients()
 {
-    ui.tabWidget->addTab( new pacientsWidget( this, database ), tr("Patients") );
+    logger << "Patients showed\n";
+    ui.tabWidget->addTab( new pacientsWidget( this, database, logger ), tr("Patients") );
 }
 
 void MainWindow::openDirections()
 {
-        ui.tabWidget->addTab( new directionsWidget( this, database ), tr("Directions") );
+    logger << "Directions showed\n";
+    ui.tabWidget->addTab( new directionsWidget( this, database, logger ), tr("Directions") );
 }
 
 void MainWindow::loadDatabase()
@@ -50,7 +54,9 @@ void MainWindow::loadDatabase()
         QFileInfo fInfo(fileName);
         QString dir(fInfo.absoluteDir().absolutePath()), name(fInfo.fileName());
         database.setDatabase( dir.toStdString(), name.toStdString() );
+        logger << "Loading database\n";
         database.load();
+        logger << "Database loaded\n";
     }
 }
 

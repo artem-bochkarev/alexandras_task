@@ -3,10 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Policlinic", "Policlinic\Policlinic.vcproj", "{FA2D01ED-AE6D-4F5F-A042-4BDA39033484}"
 	ProjectSection(ProjectDependencies) = postProject
+		{C6C20A1D-C572-444C-8891-94341DC19F0B} = {C6C20A1D-C572-444C-8891-94341DC19F0B}
 		{6DD67DD8-E728-42BE-BA26-96C35E64F1B6} = {6DD67DD8-E728-42BE-BA26-96C35E64F1B6}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Structs", "Structs\Structs.vcproj", "{6DD67DD8-E728-42BE-BA26-96C35E64F1B6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tools", "Tools\Tools.vcproj", "{C6C20A1D-C572-444C-8891-94341DC19F0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +25,10 @@ Global
 		{6DD67DD8-E728-42BE-BA26-96C35E64F1B6}.Debug|Win32.Build.0 = Debug|Win32
 		{6DD67DD8-E728-42BE-BA26-96C35E64F1B6}.Release|Win32.ActiveCfg = Release|Win32
 		{6DD67DD8-E728-42BE-BA26-96C35E64F1B6}.Release|Win32.Build.0 = Release|Win32
+		{C6C20A1D-C572-444C-8891-94341DC19F0B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C6C20A1D-C572-444C-8891-94341DC19F0B}.Debug|Win32.Build.0 = Debug|Win32
+		{C6C20A1D-C572-444C-8891-94341DC19F0B}.Release|Win32.ActiveCfg = Release|Win32
+		{C6C20A1D-C572-444C-8891-94341DC19F0B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

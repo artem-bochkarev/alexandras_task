@@ -4,13 +4,14 @@
 #include <QMenu>
 #include "ui_directionsWidget.h"
 #include "../Structs/policlinic_database.h"
+#include "../Tools/Logger.h"
 
 class directionsWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    directionsWidget( QWidget *parent, PoliclinicDatabase& database );
+    directionsWidget( QWidget *parent, PoliclinicDatabase& database, Tools::Logger& );
     ~directionsWidget();
 
 private slots:
@@ -33,5 +34,6 @@ private:
     PoliclinicDatabase& database;
     mutable std::list<direction> cachedDirections;
     myList::iterator directionClicked;
+    Tools::Logger& logger;
     Ui::DirectionsWidgetForm ui;
 };

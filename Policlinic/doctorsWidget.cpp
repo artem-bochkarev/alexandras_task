@@ -6,8 +6,8 @@
 #include <QContextMenuEvent>
 #include <string>
 
-doctorsWidget::doctorsWidget( QWidget *parent, PoliclinicDatabase& database )
-    : QWidget(parent), database(database)
+doctorsWidget::doctorsWidget( QWidget *parent, PoliclinicDatabase& database, Tools::Logger& logger )
+    : QWidget(parent), database(database), logger(logger)
 {
     ui.setupUi(this);
 

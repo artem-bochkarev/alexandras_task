@@ -8,10 +8,12 @@
 #include <string>
 #include <list>
 
+#include "../Tools/Logger.h"
+
 class PoliclinicDatabase
 {
 public:
-    PoliclinicDatabase();
+    PoliclinicDatabase(Tools::Logger&);
 
     BigHash& getPatients();
     Tree& getDoctors();
@@ -32,4 +34,6 @@ private:
     mutable doctor tmp;
     std::string fileName;
     std::string directoryName;
+
+    Tools::Logger& logger;
 };

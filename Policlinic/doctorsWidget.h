@@ -4,13 +4,14 @@
 #include <QMenu>
 #include "ui_doctorsWidget.h"
 #include "../Structs/policlinic_database.h"
+#include "../Tools/Logger.h"
 
 class doctorsWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    doctorsWidget( QWidget *parent, PoliclinicDatabase& );
+    doctorsWidget( QWidget *parent, PoliclinicDatabase&, Tools::Logger& );
     ~doctorsWidget();
 
 private slots:
@@ -34,5 +35,6 @@ private:
     bool isCacheValid;
     mutable std::list<doctor> cachedDoctors;
     doctor docClicked;
+    Tools::Logger& logger;
     Ui::DoctorsWidgetForm ui;
 };

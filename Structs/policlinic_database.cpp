@@ -2,8 +2,8 @@
 #include <fstream>
 #include <set>
 
-PoliclinicDatabase::PoliclinicDatabase()
-:patients(3, 2) {}
+PoliclinicDatabase::PoliclinicDatabase(Tools::Logger& logger)
+:patients(3, 2), logger(logger) {}
 
 myList& PoliclinicDatabase::getDirections()
 {
@@ -53,16 +53,22 @@ void PoliclinicDatabase::load()
             docFileName = directoryName + docFileName;
             dirFileName = directoryName + dirFileName;
             patFileName = directoryName + patFileName;
+            logger << "Loading doctors...";
             if ( docI == "txt" )
                 doctors.readFromTXT( docFileName.c_str() );
             else
                 doctors.readFromFile( docFileName.c_str() );
 
+            logger << "OK\n";
+            logger << "Loading ptients...";
             if ( patI == "txt" )
                 patients.readFromWinTXT( patFileName.c_str() );
+            logger << "OK\n";
 
+            logger << "Loading directions...";
             if ( dirI == "txt" )
                 directions.readFromTxt( dirFileName.c_str() );
+            logger << "OK\n";
         }
     }
 }

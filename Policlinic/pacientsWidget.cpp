@@ -8,8 +8,8 @@
 #include <string>
 #include <cassert>
 
-pacientsWidget::pacientsWidget( QWidget *parent, PoliclinicDatabase& database )
-    : QWidget(parent), database(database)
+pacientsWidget::pacientsWidget( QWidget *parent, PoliclinicDatabase& database, Tools::Logger& logger )
+    : QWidget(parent), database(database), logger(logger)
 {
     ui.setupUi(this);
 
