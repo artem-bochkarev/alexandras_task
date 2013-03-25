@@ -43,4 +43,5 @@ private:
 
     Tools::Logger& logger;
     bool modified;
+    bool haveFileNames;
 };

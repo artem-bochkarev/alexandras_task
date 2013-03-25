@@ -9,6 +9,7 @@ MainWindow::MainWindow(Tools::Logger& logger, QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags), logger(logger), database(logger)
 {
     ui.setupUi(this);
+
     QObject::connect( ui.actionOpen_doctors, SIGNAL( triggered() ),
         this, SLOT( openDoctors() ) );
     QObject::connect( ui.actionOpen_patients, SIGNAL( triggered() ),

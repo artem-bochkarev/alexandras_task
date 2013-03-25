@@ -3,7 +3,7 @@
 #include <set>
 
 PoliclinicDatabase::PoliclinicDatabase(Tools::Logger& logger)
-:patients(3, 2), logger(logger), modified(false) {}
+:patients(3, 2), logger(logger), modified(false), haveFileNames(false) {}
 
 myList& PoliclinicDatabase::getDirections()
 {
@@ -52,6 +52,7 @@ void PoliclinicDatabase::fillFileNames()
             docFileName = directoryName + docFileName;
             dirFileName = directoryName + dirFileName;
             patFileName = directoryName + patFileName;
+            haveFileNames = true;
         }
     }
 }
@@ -84,20 +85,23 @@ void PoliclinicDatabase::load()
 void PoliclinicDatabase::save()
 {
     fillFileNames();
+    if ( haveFileNames )
+    {
         logger << "Saving doctors...";
-    if ( docI != "txt" )
-        doctors.writeBinaryFile( docFileName.c_str() );
+        if ( docI != "txt" )
+            doctors.writeBinaryFile( docFileName.c_str() );
 
-    logger << "OK\n";
-    logger << "Saving patients...";
-    if ( patI != "txt" )
-        patients.writeBinaryFile( patFileName.c_str() );
-    logger << "OK\n";
+        logger << "OK\n";
+        logger << "Saving patients...";
+        if ( patI != "txt" )
+            patients.writeBinaryFile( patFileName.c_str() );
+        logger << "OK\n";
 
-    logger << "Saving directions...";
-    if ( dirI != "txt" )
-        directions.writeBinaryFile( dirFileName.c_str() );
-    logger << "OK\n";
+        logger << "Saving directions...";
+        if ( dirI != "txt" )
+            directions.writeBinaryFile( dirFileName.c_str() );
+        logger << "OK\n";
+    }
 }
 
 std::list<std::string> PoliclinicDatabase::getDoctorsSpecialities() const

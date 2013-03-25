@@ -89,12 +89,16 @@ void doctorsWidget::contextMenuEvent( QContextMenuEvent * qEvent )
 
 void doctorsWidget::contextMenuRequested( const QPoint& point )
 {
-    contextMenu->exec( ui.tableWidget->mapToGlobal( point ) );
+    QPoint globalPos1 = ui.tableWidget->mapToGlobal(point);
+    globalPos1.setX( globalPos1.x() + contextMenu->rect().width()/2 );
+    globalPos1.setY( globalPos1.y() + contextMenu->rect().height()/2 );
+    contextMenu->exec( globalPos1 );
 }
 
 void doctorsWidget::deletePressed()
 {
     database.getDoctors().remove( docClicked );
+    database.save();
     fillRows();
 }
 
@@ -106,6 +110,7 @@ void doctorsWidget::changePressed()
     if ( result==QDialog::Accepted )
     {
         database.getDoctors().changeData( docClicked, tmp );
+        database.save();
         fillRows(); // TODO: fill just this row
     }
 }
@@ -118,6 +123,7 @@ void doctorsWidget::addPressed()
     if ( result==QDialog::Accepted )
     {
         database.getDoctors().add( tmp );
+        database.save();
         fillRows(); // TODO: fill just this row
     }
 }
@@ -126,3 +132,4 @@ doctorsWidget::~doctorsWidget()
 {
 
 }
+

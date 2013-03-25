@@ -96,12 +96,16 @@ void pacientsWidget::contextMenuEvent( QContextMenuEvent * qEvent )
 
 void pacientsWidget::contextMenuRequested( const QPoint& point )
 {
-    contextMenu->exec( ui.tableWidget->mapToGlobal( point ) );
+    QPoint globalPos = ui.tableWidget->mapToGlobal(point);
+    globalPos.setX( globalPos.x() + contextMenu->rect().width()/2 );
+    globalPos.setY( globalPos.y() + contextMenu->rect().height()/2 );
+    contextMenu->exec( globalPos );
 }
 
 void pacientsWidget::deletePressed()
 {
     database.getPatients().remove(pacientClicked);
+    database.save();
     fillRows();
 }
 
@@ -128,6 +132,7 @@ void pacientsWidget::changePressed()
         }
         database.getPatients().remove( pacientClicked );
         database.getPatients().add( tmp );
+        database.save();
         fillRows(); // TODO: fill just this row
     }
 }

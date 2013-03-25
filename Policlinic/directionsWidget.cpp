@@ -116,12 +116,16 @@ void directionsWidget::contextMenuEvent( QContextMenuEvent * qEvent )
 
 void directionsWidget::contextMenuRequested( const QPoint& point )
 {
-    contextMenu->exec( ui.tableWidget->mapToGlobal( point ) );
+    QPoint globalPos = ui.tableWidget->mapToGlobal(point);
+    globalPos.setX( globalPos.x() + contextMenu->rect().width()/2 );
+    globalPos.setY( globalPos.y() + contextMenu->rect().height()/2 );
+    contextMenu->exec( globalPos );
 }
 
 void directionsWidget::deletePressed()
 {
     database.getDirections().remove( directionClicked );
+    database.save();
     fillRows();
 }
 
@@ -131,7 +135,10 @@ void directionsWidget::addPressed()
     directionEditDialog dlg( this, 0, database );
     int result = dlg.exec();
     if ( result==QDialog::Accepted )
+    {
         sort(database.getDirections().begin(), database.getDirections().end());
+        database.save();
+    }
     fillRows();
 }
 
@@ -145,6 +152,7 @@ void directionsWidget::changePressed()
         database.getDirections().remove(directionClicked);
         database.getDirections().add(tmp);
         sort(database.getDirections().begin(), database.getDirections().end());
+        database.save();
         fillRows(); // TODO: fill just this row
     }
 }
