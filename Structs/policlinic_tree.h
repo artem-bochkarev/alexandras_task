@@ -23,9 +23,9 @@ public:
 	void add(doctor doc);                                                   //adds doctor
 	void remove(doctor doc);                                                //removes info about doctor
 	void printBalances();                                                   //prints avl coefficients( for debug purposes )
-	bool readFromTXT(char const * name);                                    //reads doctors from text file
-	bool readFromFile(char const * name);                                   //reads doctors info from special file
-	bool writeToFile(char const * name);                                    //writes doctors info to file
+	bool readTextFile(char const * name);                                       //reads doctors from text file
+	bool readBinaryFile(char const * name);                                     //reads doctors info from special file
+	bool writeBinaryFile(char const * name);                                    //writes doctors info to file
 	void showAll(std::list<doctor> & spisok) const;                         //puts all doctors to list
 	void changeData(doctor oldDoc, doctor newDoc);                          //makes changes in doctors info
 	void searchDolg(const char* sample, std::list<doctor> & spisok) const;                //searches for doctors by his profession

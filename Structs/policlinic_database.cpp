@@ -3,7 +3,7 @@
 #include <set>
 
 PoliclinicDatabase::PoliclinicDatabase(Tools::Logger& logger)
-:patients(3, 2), logger(logger) {}
+:patients(3, 2), logger(logger), modified(false) {}
 
 myList& PoliclinicDatabase::getDirections()
 {
@@ -15,7 +15,7 @@ Tree& PoliclinicDatabase::getDoctors()
     return doctors;
 }
 
-BigHash& PoliclinicDatabase::getPatients()
+Hash& PoliclinicDatabase::getPatients()
 {
     return patients;
 }
@@ -41,40 +41,63 @@ void PoliclinicDatabase::setDatabase( std::string& dir, std::string& name )
     fileName = name;
 }
 
-void PoliclinicDatabase::load()
+void PoliclinicDatabase::fillFileNames()
 {
     if ( fileName != "" )
     {
         std::ifstream ifs((directoryName + fileName).c_str());
         if ( ifs.is_open() )
         {
-            std::string docI, docFileName, patI, patFileName, dirI, dirFileName;
             ifs >> docI >> docFileName >> patI >> patFileName >> dirI >> dirFileName;
             docFileName = directoryName + docFileName;
             dirFileName = directoryName + dirFileName;
             patFileName = directoryName + patFileName;
-            logger << "Loading doctors...";
-            if ( docI == "txt" )
-                doctors.readFromTXT( docFileName.c_str() );
-            else
-                doctors.readFromFile( docFileName.c_str() );
-
-            logger << "OK\n";
-            logger << "Loading ptients...";
-            if ( patI == "txt" )
-                patients.readFromWinTXT( patFileName.c_str() );
-            logger << "OK\n";
-
-            logger << "Loading directions...";
-            if ( dirI == "txt" )
-                directions.readFromTxt( dirFileName.c_str() );
-            logger << "OK\n";
         }
     }
 }
 
+void PoliclinicDatabase::load()
+{
+    fillFileNames();
+    logger << "Loading doctors...";
+    if ( docI == "txt" )
+        doctors.readTextFile( docFileName.c_str() );
+    else
+        doctors.readBinaryFile( docFileName.c_str() );
+
+    logger << "OK\n";
+    logger << "Loading ptients...";
+    if ( patI == "txt" )
+        patients.readTextFile( patFileName.c_str() );
+    else
+        patients.readBinaryFile( patFileName.c_str() );
+    logger << "OK\n";
+
+    logger << "Loading directions...";
+    if ( dirI == "txt" )
+        directions.readTextFile( dirFileName.c_str() );
+    else
+        directions.readBinaryFile( dirFileName.c_str() );
+    logger << "OK\n";
+}
+
 void PoliclinicDatabase::save()
 {
+    fillFileNames();
+        logger << "Saving doctors...";
+    if ( docI != "txt" )
+        doctors.writeBinaryFile( docFileName.c_str() );
+
+    logger << "OK\n";
+    logger << "Saving patients...";
+    if ( patI != "txt" )
+        patients.writeBinaryFile( patFileName.c_str() );
+    logger << "OK\n";
+
+    logger << "Saving directions...";
+    if ( dirI != "txt" )
+        directions.writeBinaryFile( dirFileName.c_str() );
+    logger << "OK\n";
 }
 
 std::list<std::string> PoliclinicDatabase::getDoctorsSpecialities() const

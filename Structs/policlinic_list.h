@@ -44,17 +44,24 @@ public:
 			Node * temp;
 	};
 	myList();
-	void add(direction dir);                             //adds referral to List
+    ~myList();
+	
 	iterator begin();                                    //returns iterator to first element
 	iterator end();                                      //returns iterator to last element(be carefull it is Cyclic list, (begin()==end()))
-	void remove(direction dir);                          //removes referral if it exists
+
+	void add(direction dir);                             //adds referral to List
+    void remove(direction dir);                          //removes referral if it exists
 	void remove (iterator & it);                         //removes refferals by iterator
-	void readFromTxt(const char * str);                  //read referrals from text file
-	~myList();
+	
+    void readTextFile   (const char * str);              //read referrals from text file
+    void readBinaryFile (const char * str);              //read referrals from text file
+    void writeBinaryFile(const char * str);              //read referrals from text file
+	
+    
 	void clear();                                        //clears List
 	size_t size();                                       //return number of referrals in List
 	void searchPacient(pacient pac, std::list<direction> & dirs);  //searches for referrals for specific patient
-	void searchDoctor(doctor doc, std::list<direction> & dirs);    //searches for referrals for specific patient
+	void searchDoctor (doctor doc, std::list<direction> & dirs);   //searches for referrals for specific patient
 private:
 	Node * first;
 	size_t count;

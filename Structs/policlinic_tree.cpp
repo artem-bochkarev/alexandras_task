@@ -43,7 +43,7 @@ void Tree::printBalances()
 	printf("\n");
 }
 
-bool Tree::readFromTXT(char const * name)
+bool Tree::readTextFile(char const * name)
 {
 	FILE * file = fopen(name, "rt");
 	int n;
@@ -76,7 +76,7 @@ bool Tree::readFromTXT(char const * name)
 	return true;
 }
 
-bool Tree::readFromFile(char const * name)
+bool Tree::readBinaryFile(char const * name)
 {
 	FILE * file = fopen(name, "rb");
 	size_t k;
@@ -91,7 +91,7 @@ bool Tree::readFromFile(char const * name)
 	return true;
 }
 
-bool Tree::writeToFile(char const * name)
+bool Tree::writeBinaryFile(char const * name)
 {
 	FILE * file = fopen(name, "wb");
 	fwrite(&count, sizeof(size_t), 1, file);

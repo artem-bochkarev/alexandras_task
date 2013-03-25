@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Load database</source>
-        <translation></translation>
+        <translation>Загрузить базу</translation>
     </message>
 </context>
 <context>

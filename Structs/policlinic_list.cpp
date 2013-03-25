@@ -49,8 +49,9 @@ void myList::remove(iterator & it)
         it.temp = NULL;
 }
 
-void myList::readFromTxt(const char * str)
+void myList::readTextFile(const char * str)
 {
+    clear();
     FILE * file = fopen(str, "rt");
     char s[51];
     fgets(s, 50, file);
@@ -79,18 +80,39 @@ void myList::readFromTxt(const char * str)
     fclose(file);
 }
 
+void myList::readBinaryFile(const char * name)
+{
+    FILE * file = fopen(name, "rb");
+	size_t k;
+	fread(&k, sizeof(size_t), 1, file);
+	for (size_t i=0; i<k; ++i)
+	{
+		direction temp;
+		fread(&temp, sizeof(temp), 1, file);
+		add(temp);
+	}
+	fclose(file);
+}
+
+void myList::writeBinaryFile(const char * name)
+{
+	FILE * file = fopen(name, "wb");
+	fwrite(&count, sizeof(size_t), 1, file);
+	
+    myList::iterator i = begin();
+    do
+    {
+        direction temp = *i;
+        fwrite(&temp, sizeof(direction), 1, file);
+        ++i;
+    }while ( i != end() );
+
+	fclose(file);
+}
+
 myList::~myList()
 {
-    Node * temp;
-    if (first != NULL)
-        if (first->prev != NULL)
-            first->prev->next = NULL;
-    while (first != NULL)
-    {
-        temp = first;
-        first = first->next;
-        delete temp;
-    }
+    clear();
 }
 
 void myList::clear()

@@ -3,6 +3,7 @@
 #include "pacientsWidget.h"
 #include "directionsWidget.h"
 #include <QFileDialog>
+#include <QCloseEvent>
 
 MainWindow::MainWindow(Tools::Logger& logger, QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags), logger(logger), database(logger)
@@ -25,6 +26,12 @@ MainWindow::MainWindow(Tools::Logger& logger, QWidget *parent, Qt::WFlags flags)
 MainWindow::~MainWindow()
 {
 
+}
+
+void MainWindow::closeEvent(QCloseEvent* ev)
+{
+    database.save();
+    ev->accept();
 }
 
 void MainWindow::openDoctors()

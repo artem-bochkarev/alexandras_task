@@ -3,12 +3,12 @@
 #include <stdio.h>
 #include <string.h>
 
-int BigHash::h_func(reg_num temp) const
+int Hash::h_func(reg_num temp) const
 {
 	return ((int)temp.okrug)%m_size;
 }
 
-bool BigHash::add(pacient temp)
+bool Hash::add(pacient temp)
 {
 	int key = h_func(temp.number);
 	if (mas[key] == NULL)
@@ -21,7 +21,7 @@ bool BigHash::add(pacient temp)
 		return false;
 }
 
-void BigHash::remove(pacient temp)
+void Hash::remove(pacient temp)
 {
 	int key = h_func(temp.number);
 	if (mas[key] != NULL)
@@ -29,7 +29,7 @@ void BigHash::remove(pacient temp)
 	return;
 }
 
-const pacient * BigHash::getID(reg_num num) const
+const pacient * Hash::getID(reg_num num) const
 {
 	int key = h_func(num);
 	if (mas[key] == NULL)
@@ -37,7 +37,7 @@ const pacient * BigHash::getID(reg_num num) const
 	return mas[num.okrug]->getID(num);
 }
 
-void BigHash::searchFio(const char * fio, std::list<pacient> & lst)
+void Hash::searchFio(const char * fio, std::list<pacient> & lst)
 {
 	for (int i=0; i<m_size; ++i)
 		if (mas[i] != NULL)
@@ -46,7 +46,7 @@ void BigHash::searchFio(const char * fio, std::list<pacient> & lst)
 		}
 }
 
-void BigHash::showAll(std::list<pacient> & lst)
+void Hash::showAll(std::list<pacient> & lst)
 {
 	for (int i=0; i<m_size; ++i)
 		if (mas[i] != NULL)
@@ -55,7 +55,7 @@ void BigHash::showAll(std::list<pacient> & lst)
 		}
 }
 
-BigHash::BigHash(int max_okrug, int sm_size)
+Hash::Hash(int max_okrug, int sm_size)
 {
 	count = 0;
 	mas = new SmallHash * [max_okrug];
@@ -66,7 +66,7 @@ BigHash::BigHash(int max_okrug, int sm_size)
 	m_size = max_okrug;
 }
 
-BigHash::~BigHash()
+Hash::~Hash()
 {
 	for (int i=0; i<m_size; ++i)
 		if (mas[i] != NULL)
@@ -74,7 +74,7 @@ BigHash::~BigHash()
 	delete mas;
 }
 
-void BigHash::readFromWinTXT(const char * name)
+void Hash::readTextFile(const char * name)
 {
 	FILE * file = fopen(name, "rt");
 	char s[51];
@@ -107,7 +107,39 @@ void BigHash::readFromWinTXT(const char * name)
 	fclose(file);
 }
 
-void BigHash::clear()
+void Hash::readBinaryFile(const char * name)
+{
+	FILE * file = fopen(name, "rb");
+	size_t k;
+	fread(&k, sizeof(size_t), 1, file);
+	for (size_t i=0; i<k; ++i)
+	{
+		pacient temp;
+		fread(&temp, sizeof(temp), 1, file);
+		add(temp);
+	}
+	fclose(file);
+}
+
+void Hash::writeBinaryFile(const char * name)
+{
+	FILE * file = fopen(name, "wb");
+    std::list<pacient> lst; 
+    showAll( lst );
+    size_t size = lst.size();
+    fwrite(&size, sizeof(size), 1, file);
+    
+    std::list<pacient>::iterator i = lst.begin();
+    for ( ; i != lst.end(); ++i )
+    {
+        pacient temp = *i;
+        fwrite(&temp, sizeof(pacient), 1, file );
+    }
+	
+	fclose(file);
+}
+
+void Hash::clear()
 {
 	for (int i=0; i<m_size; ++i)
 		if (mas[i] != NULL)
@@ -118,12 +150,12 @@ void BigHash::clear()
 	count = 0;
 }
 
-size_t BigHash::size()
+size_t Hash::size()
 {
 	return count;
 }
 
-std::list<int> BigHash::getAreas() const
+std::list<int> Hash::getAreas() const
 {
     std::list<int> result;
     for (int i=0; i<m_size; ++i)
@@ -132,7 +164,7 @@ std::list<int> BigHash::getAreas() const
     return result;
 }
 
-std::list<int> BigHash::getNumbers(int index) const
+std::list<int> Hash::getNumbers(int index) const
 {
     std::list<int> result;
 	if (mas[index] != NULL)

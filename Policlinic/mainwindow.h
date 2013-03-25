@@ -21,6 +21,9 @@ private slots:
     void loadDatabase();
     void tabCloseRequested( int );
 
+protected:
+    void closeEvent(QCloseEvent*);
+
 private:
     Ui::MainWindowClass ui;
     PoliclinicDatabase database;

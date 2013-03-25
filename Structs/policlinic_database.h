@@ -15,7 +15,7 @@ class PoliclinicDatabase
 public:
     PoliclinicDatabase(Tools::Logger&);
 
-    BigHash& getPatients();
+    Hash& getPatients();
     Tree& getDoctors();
     myList& getDirections();
 
@@ -28,12 +28,19 @@ public:
     void load();
     void save();
 private:
-    BigHash patients;
+    PoliclinicDatabase();
+    PoliclinicDatabase& operator =(const PoliclinicDatabase& );
+    void fillFileNames();
+    Hash patients;
     Tree doctors;
     myList directions;
     mutable doctor tmp;
     std::string fileName;
     std::string directoryName;
 
+    std::string docFileName, patFileName, dirFileName;
+    std::string docI, patI, dirI;
+
     Tools::Logger& logger;
+    bool modified;
 };
