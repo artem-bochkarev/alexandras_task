@@ -31,6 +31,7 @@ doctorsWidget::doctorsWidget( QWidget *parent, PoliclinicDatabase& database, Too
     QObject::connect( editAction, SIGNAL(triggered(bool)), this, SLOT( changePressed() ) );
     QObject::connect( addAction, SIGNAL(triggered(bool)), this, SLOT( addPressed() ) );
     QObject::connect( ui.FilterEdit, SIGNAL(textChanged(QString)), this, SLOT( reShow() ) );
+    QObject::connect( ui.showButton, SIGNAL(clicked()), this, SLOT( dirShow() ) );
 
     fillRows();
 }
@@ -77,11 +78,14 @@ void doctorsWidget::cellCLicked(int row, int column)
     //QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
     QTextCodec *codec = QTextCodec::codecForName("CP866");
     ui.cabinetLabel->setText( tr("Cabinet") + ": " + QString::number( iter->cabinet ) );
-    ui.directLabel->setText( tr("Directions: Don't know") );
     ui.nameLabel->setText( codec->toUnicode(fio) );
     ui.specLabel->setText( codec->toUnicode(dolgnost) );
     ui.workLabel->setText( tr("Work hours") + ": " + codec->toUnicode( hours ) );
+
     docClicked = *iter;
+    std::list<direction> dirs;
+    database.getDirections().searchDoctor( docClicked, dirs );
+    ui.directLabel->setText( tr("Directions: ") + QString::number( dirs.size() ) );
 }
 
 void doctorsWidget::contextMenuEvent( QContextMenuEvent * qEvent )
@@ -134,6 +138,10 @@ void doctorsWidget::addPressed()
 void doctorsWidget::reShow()
 {
     fillRows();
+}
+
+void doctorsWidget::dirShow()
+{
 }
 
 doctorsWidget::~doctorsWidget()

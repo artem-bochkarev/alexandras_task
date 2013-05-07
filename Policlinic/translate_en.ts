@@ -426,7 +426,7 @@
     </message>
     <message>
         <source>Directions: Don&apos;t know</source>
-        <translation>Directions: Don&apos;t know</translation>
+        <translation type="obsolete">Directions: Don&apos;t know</translation>
     </message>
     <message>
         <source>Work hours: </source>
@@ -444,6 +444,10 @@
         <source>Work hours</source>
         <translation>Work hours</translation>
     </message>
+    <message>
+        <source>Directions: </source>
+        <translation>Directions: </translation>
+    </message>
 </context>
 <context>
     <name>pacientsWidget</name>
@@ -457,7 +461,7 @@
     </message>
     <message>
         <source>Directions: Don&apos;t know</source>
-        <translation>Directions: Don&apos;t know</translation>
+        <translation type="obsolete">Directions: Don&apos;t know</translation>
     </message>
     <message>
         <source>Another patient( </source>
@@ -477,6 +481,10 @@ Operation is invalid</translation>
     <message>
         <source>Add</source>
         <translation>Add</translation>
+    </message>
+    <message>
+        <source>Directions: </source>
+        <translation>Directions: </translation>
     </message>
 </context>
 </TS>

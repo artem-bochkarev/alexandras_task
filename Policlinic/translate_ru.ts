@@ -450,7 +450,7 @@
     </message>
     <message>
         <source>Directions: Don&apos;t know</source>
-        <translation>Направления: Нет информации</translation>
+        <translation type="obsolete">Направления: Нет информации</translation>
     </message>
     <message>
         <source>Work hours: </source>
@@ -468,6 +468,10 @@
         <source>Work hours</source>
         <translation>Часы приема</translation>
     </message>
+    <message>
+        <source>Directions: </source>
+        <translation>Направления: </translation>
+    </message>
 </context>
 <context>
     <name>pacientsWidget</name>
@@ -481,7 +485,7 @@
     </message>
     <message>
         <source>Directions: Don&apos;t know</source>
-        <translation>Направления: Нет информации</translation>
+        <translation type="obsolete">Направления: Нет информации</translation>
     </message>
     <message>
         <source>Another patient( </source>
@@ -500,6 +504,10 @@ Operation is Invalid</source>
     <message>
         <source>Add</source>
         <translation>Добавить</translation>
+    </message>
+    <message>
+        <source>Directions: </source>
+        <translation>Направления: </translation>
     </message>
 </context>
 </TS>

@@ -22,6 +22,7 @@ private slots:
     void addPressed();
     void changePressed();
     void reShow();
+    void dirShow();
 
 private:
     void fillRows();

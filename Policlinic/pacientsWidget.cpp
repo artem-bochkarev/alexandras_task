@@ -33,6 +33,7 @@ pacientsWidget::pacientsWidget( QWidget *parent, PoliclinicDatabase& database, T
     QObject::connect( editAction, SIGNAL(triggered(bool)), this, SLOT( changePressed() ) );
     QObject::connect( addAction, SIGNAL(triggered(bool)), this, SLOT( addPressed() ) );
     QObject::connect( ui.FilterEdit, SIGNAL(textChanged(QString)), this, SLOT( reShow() ) );
+    QObject::connect( ui.showButton, SIGNAL(clicked()), this, SLOT( dirShow() ) );
 
     /*QObject::connect( this, SIGNAL( contextMenuEvent( QContextMenuEvent * ) ),
         this, SLOT( contextMenuRequested( QContextMenuEvent * ) ) );*/
@@ -90,10 +91,13 @@ void pacientsWidget::cellCLicked(int row, int column)
     ui.birthLabel->setText( QString::number(iter->birth) );
     ui.workPlace->setText( codec->toUnicode(dolgnost) );
 
-    ui.directionsLabel->setText( tr("Directions: Don't know") );
+    
     ui.nameLabel->setText( codec->toUnicode(fio) );
 
     pacientClicked = *iter;
+    std::list<direction> dirs;
+    database.getDirections().searchPacient( pacientClicked, dirs );
+    ui.directionsLabel->setText( tr("Directions: ") + QString::number( dirs.size() ) );
 }
 
 void pacientsWidget::contextMenuEvent( QContextMenuEvent * qEvent )
@@ -180,4 +184,8 @@ pacientsWidget::~pacientsWidget()
 void pacientsWidget::reShow()
 {
     fillRows();
+}
+
+void pacientsWidget::dirShow()
+{
 }
