@@ -167,6 +167,10 @@
         <source>show</source>
         <translation>show</translation>
     </message>
+    <message>
+        <source>Filter</source>
+        <translation>Filter by speciality</translation>
+    </message>
 </context>
 <context>
     <name>Form</name>
@@ -311,6 +315,10 @@
     <message>
         <source>show</source>
         <translation>show</translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation>Filter by Name</translation>
     </message>
 </context>
 <context>
@@ -465,6 +473,10 @@ Operation is invalid</translation>
         <source>Hospital manager</source>
         <translatorcomment>Hospital manager</translatorcomment>
         <translation>Hospital manager</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Add</translation>
     </message>
 </context>
 </TS>

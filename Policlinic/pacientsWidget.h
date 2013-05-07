@@ -20,6 +20,8 @@ private slots:
     void contextMenuRequested( const QPoint& );
     void deletePressed();
     void changePressed();
+    void addPressed();
+    void reShow();
 
 private:
     void fillRows();
@@ -28,6 +30,7 @@ private:
     QMenu* contextMenu;
     QAction* deleteAction;
     QAction* editAction;
+    QAction* addAction;
 
     PoliclinicDatabase& database;
     mutable std::list<pacient> cachedPacients;

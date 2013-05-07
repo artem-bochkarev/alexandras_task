@@ -12,9 +12,9 @@ doctorsWidget::doctorsWidget( QWidget *parent, PoliclinicDatabase& database, Too
     ui.setupUi(this);
 
     contextMenu = new QMenu( this );
-    deleteAction = new QAction( tr("Delete"), this );
-    editAction = new QAction( tr("Edit"), this );
-    addAction = new QAction( tr("Add"), this );
+    deleteAction = new QAction( tr("Delete"), contextMenu );
+    editAction = new QAction( tr("Edit"), contextMenu );
+    addAction = new QAction( tr("Add"), contextMenu );
     contextMenu->addAction( deleteAction );
     contextMenu->addAction( editAction );
     contextMenu->addAction( addAction );
@@ -30,6 +30,7 @@ doctorsWidget::doctorsWidget( QWidget *parent, PoliclinicDatabase& database, Too
     QObject::connect( deleteAction, SIGNAL(triggered(bool)), this, SLOT( deletePressed() ) );
     QObject::connect( editAction, SIGNAL(triggered(bool)), this, SLOT( changePressed() ) );
     QObject::connect( addAction, SIGNAL(triggered(bool)), this, SLOT( addPressed() ) );
+    QObject::connect( ui.FilterEdit, SIGNAL(textChanged(QString)), this, SLOT( reShow() ) );
 
     fillRows();
 }
@@ -51,9 +52,11 @@ void doctorsWidget::fillRow( doctor& doc, int row )
 void doctorsWidget::fillRows()
 {
     ui.tableWidget->clearContents();
-    ui.tableWidget->setRowCount( database.getDoctors().size() );
     cachedDoctors.clear();
-    database.getDoctors().showAll( cachedDoctors );
+    QTextCodec *codec = QTextCodec::codecForName("CP866");
+    QByteArray filter = codec->fromUnicode( ui.FilterEdit->text() );
+    database.getDoctors().searchDolg( filter.constData(), cachedDoctors );
+    ui.tableWidget->setRowCount( cachedDoctors.size() );
     std::list<doctor>::iterator iter = cachedDoctors.begin();
     int row = 0;
     for ( ; iter != cachedDoctors.end(); ++iter )
@@ -126,6 +129,11 @@ void doctorsWidget::addPressed()
         database.save();
         fillRows(); // TODO: fill just this row
     }
+}
+
+void doctorsWidget::reShow()
+{
+    fillRows();
 }
 
 doctorsWidget::~doctorsWidget()

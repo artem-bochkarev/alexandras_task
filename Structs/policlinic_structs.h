@@ -60,5 +60,6 @@ bool operator < (direction const & d1, direction const & d2);
 bool operator >= (direction const & d1, direction const & d2);
 
 doctor empty_doctor();
+pacient empty_patient();
 
 #endif

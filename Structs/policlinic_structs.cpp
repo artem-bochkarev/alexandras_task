@@ -59,3 +59,15 @@ doctor empty_doctor()
     doc.fio[0] = 0;
     return doc;
 }
+
+pacient empty_patient()
+{
+    pacient pac;
+    pac.addres[0] = 0;
+    pac.birth = 0;
+    pac.fio[0] = 0;
+    pac.work[0] = 0;
+    pac.number.num = 0;
+    pac.number.okrug = 0;
+    return pac;
+}

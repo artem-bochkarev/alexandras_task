@@ -167,6 +167,10 @@
         <source>show</source>
         <translation>показать</translation>
     </message>
+    <message>
+        <source>Filter</source>
+        <translation>Поиск по специальности</translation>
+    </message>
 </context>
 <context>
     <name>Form</name>
@@ -336,6 +340,10 @@
         <source>show</source>
         <translation>показать</translation>
     </message>
+    <message>
+        <source>Filter</source>
+        <translation>Поиск по ФИО</translation>
+    </message>
 </context>
 <context>
     <name>PatientEditDialog</name>
@@ -488,6 +496,10 @@ Operation is Invalid</source>
     <message>
         <source>Hospital manager</source>
         <translation>Управление поликлиникой</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Добавить</translation>
     </message>
 </context>
 </TS>

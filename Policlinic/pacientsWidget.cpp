@@ -16,8 +16,10 @@ pacientsWidget::pacientsWidget( QWidget *parent, PoliclinicDatabase& database, T
     contextMenu = new QMenu( this );
     deleteAction = new QAction( tr("Delete"), this );
     editAction = new QAction( tr("Edit"), this );
+    addAction = new QAction( tr("Add"), this );
     contextMenu->addAction( deleteAction );
     contextMenu->addAction( editAction );
+    contextMenu->addAction( addAction );
 
     setContextMenuPolicy( Qt::NoContextMenu );
     ui.tableWidget->setContextMenuPolicy( Qt::CustomContextMenu );
@@ -29,6 +31,8 @@ pacientsWidget::pacientsWidget( QWidget *parent, PoliclinicDatabase& database, T
 
     QObject::connect( deleteAction, SIGNAL(triggered(bool)), this, SLOT( deletePressed() ) );
     QObject::connect( editAction, SIGNAL(triggered(bool)), this, SLOT( changePressed() ) );
+    QObject::connect( addAction, SIGNAL(triggered(bool)), this, SLOT( addPressed() ) );
+    QObject::connect( ui.FilterEdit, SIGNAL(textChanged(QString)), this, SLOT( reShow() ) );
 
     /*QObject::connect( this, SIGNAL( contextMenuEvent( QContextMenuEvent * ) ),
         this, SLOT( contextMenuRequested( QContextMenuEvent * ) ) );*/
@@ -53,9 +57,13 @@ void pacientsWidget::fillRow( pacient& pac, int row )
 void pacientsWidget::fillRows()
 {
     ui.tableWidget->clearContents();
-    ui.tableWidget->setRowCount( database.getPatients().size() );
+    
     cachedPacients.clear();
-    database.getPatients().showAll( cachedPacients );
+    QTextCodec *codec = QTextCodec::codecForName("CP866");
+    QByteArray filter = codec->fromUnicode( ui.FilterEdit->text() );
+    database.getPatients().searchFio( filter.constData(), cachedPacients );
+    //database.getPatients().showAll( cachedPacients );
+    ui.tableWidget->setRowCount( cachedPacients.size() );
     std::list<pacient>::iterator iter = cachedPacients.begin();
     int row = 0;
     for ( ; iter != cachedPacients.end(); ++iter )
@@ -137,7 +145,39 @@ void pacientsWidget::changePressed()
     }
 }
 
+void pacientsWidget::addPressed()
+{
+    pacient tmp = empty_patient();
+    patientEditDialog dlg( this, &tmp, database );
+    int result = dlg.exec();
+    if ( result==QDialog::Accepted )
+    {
+        //Exit if We have another patient with this number
+        if ( ( tmp.number != pacientClicked.number ) && ( database.getPatients().getID(tmp.number) != 0 ) )
+        {
+            QMessageBox msgBox;
+            msgBox.setWindowTitle(tr("Hospital manager"));
+            const pacient *p = database.getPatients().getID(tmp.number);
+            QByteArray fio(p->fio);
+            QTextCodec *codec = QTextCodec::codecForName("CP866");
+            QString patInfo = codec->toUnicode(fio);
+            patInfo += " " + QString::number(p->birth);
+            msgBox.setText(tr("Another patient( ") + patInfo + tr(" ) have this ID.\nOperation is Invalid") );
+            msgBox.exec();
+            return;
+        }
+        database.getPatients().add( tmp );
+        database.save();
+        fillRows(); // TODO: fill just this row
+    }
+}
+
 pacientsWidget::~pacientsWidget()
 {
 
+}
+
+void pacientsWidget::reShow()
+{
+    fillRows();
 }

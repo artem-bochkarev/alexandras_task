@@ -21,6 +21,7 @@ private slots:
     void deletePressed();
     void addPressed();
     void changePressed();
+    void reShow();
 
 private:
     void fillRows();
