@@ -43,6 +43,7 @@ void PoliclinicDatabase::setDatabase( std::string& dir, std::string& name )
 
 void PoliclinicDatabase::fillFileNames()
 {
+    logger << "Filling fileNames...\n";
     if ( fileName != "" )
     {
         std::ifstream ifs((directoryName + fileName).c_str());
@@ -50,10 +51,23 @@ void PoliclinicDatabase::fillFileNames()
         {
             ifs >> docI >> docFileName >> patI >> patFileName >> dirI >> dirFileName;
             docFileName = directoryName + docFileName;
+            logger << "DocFileName=" << docFileName << "\n";
+
             dirFileName = directoryName + dirFileName;
+            logger << "DirFileName=" << dirFileName << "\n";
+
             patFileName = directoryName + patFileName;
+            logger << "PatFileName=" << patFileName << "\n";
             haveFileNames = true;
+            logger << "Filenames loaded\n";
+        }else
+        {
+            logger << "Database file couldn't be open(" << fileName << ")\n";
         }
+    }
+    else
+    {
+        logger << "\nDatabase fileName doesn't exist(" << fileName << ")\n";
     }
 }
 

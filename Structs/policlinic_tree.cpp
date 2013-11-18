@@ -86,7 +86,7 @@ bool Tree::readBinaryFile(char const * name)
 	size_t k;
     if (file == 0)
     {
-        (*logger) << "File doesn't opened : " << name << "\n";
+        (*logger) << "File couldn't be open" << "\n";
         return false;
     }
 	fread(&k, sizeof(size_t), 1, file);
