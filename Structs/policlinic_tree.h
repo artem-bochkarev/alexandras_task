@@ -4,6 +4,7 @@
 #include "policlinic_structs.h"
 #include <list>
 #include <stdio.h>
+#include "../Tools/Logger.h"
 
 class Tree
 {
@@ -17,7 +18,7 @@ class Tree
 		Node(doctor D);
 	};
 public:
-	Tree();
+    Tree(Tools::Logger* log);
 	~Tree();
 	void clear();                                                           //clears all information
 	void add(doctor doc);                                                   //adds doctor
@@ -48,8 +49,10 @@ private:
 	Node * bigLeft(Node * a);
 	Node * bigRight(Node * a);
 private:
+    Tree();
 	Node * root;
 	size_t count;
+    Tools::Logger* logger;
 };
 
 #endif

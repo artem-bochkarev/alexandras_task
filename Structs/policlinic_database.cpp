@@ -3,7 +3,7 @@
 #include <set>
 
 PoliclinicDatabase::PoliclinicDatabase(Tools::Logger& logger)
-:patients(3, 2), logger(logger), modified(false), haveFileNames(false) {}
+:patients(3, 2), logger(logger), modified(false), haveFileNames(false), doctors(&logger) {}
 
 myList& PoliclinicDatabase::getDirections()
 {

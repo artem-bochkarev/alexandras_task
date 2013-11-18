@@ -11,8 +11,11 @@ Tree::Node::Node()
 Tree::Node::Node(doctor D)
 	:left(0),right(0),height(1),data(D) {}
 	
+Tree::Tree(Tools::Logger* log)
+	:count(0), root(NULL), logger(log){}
+
 Tree::Tree()
-	:count(0), root(NULL){}
+	:count(0), root(NULL), logger(0) {}
 
 Tree::~Tree()
 {
@@ -78,8 +81,14 @@ bool Tree::readTextFile(char const * name)
 
 bool Tree::readBinaryFile(char const * name)
 {
+    (*logger) << "Opening file : " << name << "\n";
 	FILE * file = fopen(name, "rb");
 	size_t k;
+    if (file == 0)
+    {
+        (*logger) << "File doesn't opened : " << name << "\n";
+        return false;
+    }
 	fread(&k, sizeof(size_t), 1, file);
 	for (size_t i=0; i<k; ++i)
 	{
