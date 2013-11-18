@@ -62,7 +62,7 @@ void PoliclinicDatabase::fillFileNames()
             logger << "Filenames loaded\n";
         }else
         {
-            logger << "Database file couldn't be open(" << fileName << ")\n";
+            logger << "Database file couldn't be open(" << (directoryName + fileName) << ")\n";
         }
     }
     else
