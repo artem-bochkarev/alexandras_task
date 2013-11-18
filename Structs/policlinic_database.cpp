@@ -67,7 +67,7 @@ void PoliclinicDatabase::load()
         doctors.readBinaryFile( docFileName.c_str() );
 
     logger << "OK\n";
-    logger << "Loading ptients...";
+    logger << "Loading patients...";
     if ( patI == "txt" )
         patients.readTextFile( patFileName.c_str() );
     else

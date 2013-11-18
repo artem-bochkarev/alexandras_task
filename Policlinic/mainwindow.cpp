@@ -37,20 +37,20 @@ void MainWindow::closeEvent(QCloseEvent* ev)
 
 void MainWindow::openDoctors()
 {
-    logger << "Doctors showed\n";
     ui.tabWidget->addTab( new doctorsWidget( this, database, logger ), tr("Doctors") );
+    logger << "Doctors showed\n";
 }
 
 void MainWindow::openPatients()
 {
-    logger << "Patients showed\n";
     ui.tabWidget->addTab( new pacientsWidget( this, database, logger ), tr("Patients") );
+    logger << "Patients showed\n";
 }
 
 void MainWindow::openDirections()
 {
-    logger << "Directions showed\n";
     ui.tabWidget->addTab( new directionsWidget( this, database, logger ), tr("Directions") );
+    logger << "Directions showed\n";
 }
 
 void MainWindow::loadDatabase()
